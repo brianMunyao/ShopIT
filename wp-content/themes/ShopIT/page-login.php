@@ -1,5 +1,4 @@
 <?php get_header(); ?>
 
-<div class="p-4">Test index</div>
-
+<div class="p-3">Test Login</div>
 <?php get_footer(); ?>
