@@ -1,3 +1,11 @@
+-- DO NOT TOUCH THE FOLLOWING 3 LINES
+DROP DATABASE shopit;
+CREATE DATABASE shopit;
+USE shopit;
+
+-- REPLACE HERE DOWNWARDS
+
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
