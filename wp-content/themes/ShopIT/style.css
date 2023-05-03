@@ -526,3 +526,7 @@ video {
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
+
+.p-4 {
+  padding: 1rem !important;
+}
