@@ -6,11 +6,11 @@ if (have_posts()) :
 ?>
 
         <div class="w-100 bg-light vh-100">
-            <div class="w-50 bg-white d-flex flex-column pt-2 pb-2">
+            <div class="w-50 bg-white d-flex flex-column pt-2 pb-2 ms-4 shadow-sm rounded-1 border">
                 <div>
                     <h5 class="fw-bold text-center">Account Information</h5>
                 </div>
-                <hr>
+                <hr class="opacity-25">
                 <div class="d-flex flex-column">
                     <div class="d-flex justify-content-end pe-5 align-items-center gap-1">
                         <ion-icon name="pencil" class="text-primary"></ion-icon>
@@ -33,7 +33,7 @@ if (have_posts()) :
                         </div>
                     </div>
                 </div>
-                <hr>
+                <hr class="opacity-25">
                 <div>
                     <h5 class="fw-bold text-center">Address Information</h5>
                 </div>
