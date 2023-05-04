@@ -16,7 +16,7 @@
     <?php
 
     $slug = basename(get_permalink());
-    $logo_url = get_template_directory_uri() . "/temp_images/logo-cart.png";
+    $logo_url = get_template_directory_uri() . "/assets/logo-cart.png";
 
     if ($slug == 'register' || $slug == 'login') {
     ?>
