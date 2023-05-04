@@ -5,7 +5,7 @@ if (have_posts()) :
     while (have_posts()) : the_post();
 ?>
         <div class="bg-light w-100 vh-100">
-            <div class="bg-white w-50 rounded pt-4 pb-3 d-flex flex-column justify-content-center align-items-center">
+            <div class="bg-white w-50 rounded pt-4 pb-3 d-flex flex-column justify-content-center align-items-center ms-4 shadow-sm rounded-1 border">
                 <div class="mx-auto text-center ">
                     <h2 class="font-bold text-justify">Update Your Information</h2>
                 </div>
@@ -48,7 +48,7 @@ if (have_posts()) :
                         </div>
                     </div>
                     <div class="mt-2 ">
-                        <button type="submit" class="btn btn-dark text-white p-1" style="width: 350px">Update</button>
+                        <button type="submit" class="btn btn-primary text-white p-1" style="width: 350px">Update</button>
                     </div>
                 </form>
             </div>
