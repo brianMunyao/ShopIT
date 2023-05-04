@@ -1,10 +1,10 @@
 <?php get_header(); ?>
 
 <div class="p-3 mb-2 pt-5 bg-light text-dark ">
-    <div class=" row grid gap-5  ms-4 max-width: 100%; ">
+    <div class=" row grid gap-5  ms-4  ">
 
         <!-- ITEMS PRESENT IN THE CART -->
-        <div class="col-8 p-3 mb-2 bg-white text-dark border shadow-sm ">
+        <div class="col-lg-8 p-3 mb-2 bg-white text-dark border shadow-sm col-xs-2 col-sm-4 col-md-6 ">
             <h5>Cart (1)</h5>
             <hr class="opacity-25">
             <div class="container text-center">
@@ -33,7 +33,7 @@
         </div>
 
         <!-- CART SUMMARY -->
-        <div class=" col-3 p-3 mb-2 bg-white text-dark border shadow-sm w-25 h-50">
+        <div class=" col-lg-3 p-3 mb-2 bg-white text-dark border shadow-sm col-xs-2 col-sm-2 col-md-4">
             <div class="description">
                 <h6>Cart Summary</h6>
                 <hr class="opacity-25">
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="d-grid gap-2 mt-1">
-                <button class="btn btn-secondary" type="button">Cashout</button>
+                <button class="btn btn-primary" type="button">Cashout</button>
             </div>
         </div>
     </div>
