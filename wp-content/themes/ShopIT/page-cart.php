@@ -4,7 +4,7 @@
     <div class=" row grid gap-5  ms-4  ">
 
         <!-- ITEMS PRESENT IN THE CART -->
-        <div class="col-lg-8 p-3 mb-2 bg-white text-dark border shadow-sm col-xs-2 col-sm-4 col-md-6 ">
+        <div class="col-md-8 p-3 mb-2 bg-white text-dark border shadow-sm  ">
             <h5>Cart (1)</h5>
             <hr class="opacity-25 w-100">
             <div class="container text-center ">
@@ -52,7 +52,7 @@
         </div>
 
         <!-- CART SUMMARY -->
-        <div class=" col-lg-3 p-3 mb-2 bg-white text-dark border shadow-sm col-xs-2 col-sm-2 col-md-4">
+        <div class=" col-md-3 p-3 mb-2 bg-white text-dark border shadow-sm ">
             <div class="description">
                 <h6>Cart Summary</h6>
                 <hr class="opacity-25">
