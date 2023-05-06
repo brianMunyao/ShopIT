@@ -20,8 +20,78 @@ function shopit_theme_setup()
     add_theme_support('menus');
     register_nav_menu('primary', 'Primary Header');
     register_nav_menu('secondary', 'Footer Navigation');
+    add_theme_support('post-thumbnails', ['products']);
 }
 add_action('init', 'shopit_theme_setup');
+
+
+function products_post_type()
+{
+
+    $labels = [
+        'name' => 'Products',
+        'singular_name' => 'Products',
+        'add_new' => 'Add Product Item',
+        'edit_item' => 'Edit Product Item',
+        'update_item' => 'Update Product Item',
+        'all_items' => 'All Products',
+        'add_new_item' => 'Edit Item',
+        'new_item' => 'New Items',
+        'view_item' => 'View Item',
+        'search_item' => 'Search Product',
+        'not_found' => 'No Products Found',
+        'parent_item_colon' => 'Parent Item'
+    ];
+
+    $args = [
+        'labels' => $labels,
+        'public' => true,
+        'has_archive' => false,
+        'publicly_queryable' => true,
+        'query_variable' => true,
+        'rewrite' => array('slug' => 'products'),
+        'capability' => 'post',
+        'supports' => array('title', 'editor', 'categories', 'author', 'thumbnail', 'comments'),
+        'menu_icon' => 'dashicons-tag',
+        // 'taxonomies' => [
+        //     'product_group'
+        // ]
+    ];
+    register_post_type('products', $args);
+}
+add_action('init', 'products_post_type');
+
+
+function categories_taxonomy()
+{
+    $labels = [
+        'name' => 'Product Categories',
+        'singular_name' => 'Product Category',
+        'search_items' => 'Search Product Categories',
+        'all_items' => 'All Product Categories',
+        'parent_item' => 'Parent Product Category',
+        'parent_item_colon' => 'Parent Product Category',
+        'edit_item' => 'Edit Product Category',
+        'update_item' => 'Update Product Category',
+        'add_new_item' => 'Add New Product Category',
+        'new_item_name' => 'New Product Category Name',
+        'menu_name' => 'Product Categories',
+    ];
+
+    $args = [
+        'labels' => $labels,
+        'hierarchical' => true,
+        'show_ui' => true,
+        'show_admin_column' => true,
+        'query_var' => true,
+        'rewrite' => ['slug' => 'product-category']
+    ];
+
+    register_taxonomy('product_category', ['products'], $args);
+}
+
+
+add_action('init', 'categories_taxonomy');
 
 // ADDING NAVWALKER CLASS
 if (!file_exists(get_template_directory() . '/class-wp-bootstrap-navwalker.php')) {
