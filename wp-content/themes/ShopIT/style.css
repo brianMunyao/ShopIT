@@ -152,6 +152,14 @@ footer .footer-bottom {
 	opacity: 0.6;
 }
 
+.p-images{
+	width: 20px;
+	height: 15px;
+}
+ion-icon {
+  color: yellow;
+}
+
 @media screen and (max-width: 750px) {
 	footer {
 		padding: 0 20px;

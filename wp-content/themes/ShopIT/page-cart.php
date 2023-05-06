@@ -1,31 +1,50 @@
 <?php get_header(); ?>
 
 <div class="p-3 mb-2 pt-5 bg-light text-dark ">
-    <div class=" row grid gap-5  ms-4 max-width: 100%; ">
+    <div class=" row grid gap-5  ms-4  ">
 
         <!-- ITEMS PRESENT IN THE CART -->
-        <div class="col-8 p-3 mb-2 bg-white text-dark border shadow-sm ">
+        <div class="col-lg-8 p-3 mb-2 bg-white text-dark border shadow-sm col-xs-2 col-sm-4 col-md-6 ">
             <h5>Cart (1)</h5>
-            <hr class="opacity-25">
-            <div class="container text-center">
+            <hr class="opacity-25 w-100">
+            <div class="container text-center ">
                 <div class="row">
-                    <div class="col">
-                        <img src="https://cdn.pixabay.com/photo/2016/03/21/21/37/tv-1271650__340.png" class="img-fluid img-thumbnail w-50 h-75  " alt="..."><br>
-                        <div class="d-flex flex-row">
-                            <a href="" class="text-decoration-none text-danger"> <ion-icon name="trash-outline">REMOVE</ion-icon></a>
-                            <!-- <p>REMOVE</p> -->
-
-                        </div>
+                    <div class="col d-flex flex-row ">
+                    
+                        <img src="<?php echo esc_url(get_template_directory_uri().'./pimages/sony.png') ?> " class="rounded float-start w-50 h-100" alt="...">
 
                     </div>
-                    <div class="col-6">
+                    <div class="col-6 pt-3">
                         <p>Oraimo Roll Wireless Earbuds Bluetooth Headset Earphones</p>
                     </div>
-                    <div class="col">
-                        <p class="fw-bold">KSh 39,799</p>
-                        <p class=""> <span class="text-decoration-line-through opacity-50">
+                    <div class="col d-flex flex-row-reverse ">
+                        <p class="fw-bold ">KSh 39,799 <br>
+                         <span class="text-decoration-line-through opacity-50">
                                 KSh 42,999
-                            </span><span class="text-success"><br>-35% </span></p>
+                            </span><span class="text-danger d-flex flex-row-reverse lh-sm"><br>-35% </span></p>
+                    </div>
+
+                </div>
+                <div class="row ">
+                    <div class="col d-flex flex-row px-4">
+                        <a href="" class="text-decoration-none text-danger"> <ion-icon name="trash-outline"></ion-icon>REMOVE</a>
+                    </div>
+                    <div class="col d-flex flex-row-reverse ">
+                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                            <div class="btn-group mr-2" role="group" aria-label="First group">
+                                <button type="button" class="btn btn-secondary px-2">-</button>
+
+                            </div> &nbsp;
+                            <div class="btn-group btn-sm mr-2" role="group" aria-label="Second group">
+                            <button type="button" class="btn btn-white">2</button>
+
+                            </div>  &nbsp;
+                            <div class="btn-group " role="group" aria-label="First group">
+                                <button type="button" class="btn btn-secondary px-2">+</button>
+
+                            </div> &nbsp;
+                        </div>
+
                     </div>
                 </div>
 
@@ -33,7 +52,7 @@
         </div>
 
         <!-- CART SUMMARY -->
-        <div class=" col-3 p-3 mb-2 bg-white text-dark border shadow-sm w-25 h-50">
+        <div class=" col-lg-3 p-3 mb-2 bg-white text-dark border shadow-sm col-xs-2 col-sm-2 col-md-4">
             <div class="description">
                 <h6>Cart Summary</h6>
                 <hr class="opacity-25">
@@ -50,7 +69,7 @@
                 </div>
             </div>
             <div class="d-grid gap-2 mt-1">
-                <button class="btn btn-secondary" type="button">Cashout</button>
+                <button class="btn btn-primary" type="button">Checkout</button>
             </div>
         </div>
     </div>
