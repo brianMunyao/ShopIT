@@ -156,8 +156,8 @@ footer .footer-bottom {
 	width: 20px;
 	height: 15px;
 }
-ion-icon {
-  color: yellow;
+.stars ion-icon {
+  color: rgb(235, 219, 0);
 }
 
 @media screen and (max-width: 750px) {
@@ -405,5 +405,11 @@ ion-icon {
 	.home-hero .top-deal img {
 		width: 100%;
 		height: auto;
+	}
+	.p-images{
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+
 	}
 }
