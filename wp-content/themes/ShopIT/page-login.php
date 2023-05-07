@@ -1,3 +1,27 @@
+<?php
+$error = '';
+
+if (isset($_POST['submit'])) {
+
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $user = wp_signon([
+        'user_login' => $email,
+        'user_password' => $password
+    ]);
+
+    if (!is_wp_error($user)) {
+        wp_set_current_user($user->ID);
+        wp_set_auth_cookie($user->ID);
+        do_action('wp_login', $user->user_login, $user);
+
+        wp_redirect(home_url());
+        exit;
+    }
+}
+?>
+
 <form method="post" action="">
     <div class="custom-form">
         <?php get_header(); ?>

@@ -93,6 +93,15 @@ function categories_taxonomy()
 
 add_action('init', 'categories_taxonomy');
 
+function my_disable_admin_bar()
+{
+    if (!current_user_can('manage_options')) {
+        add_filter('show_admin_bar', '__return_false');
+    }
+}
+add_action('after_setup_theme', 'my_disable_admin_bar');
+
+
 // ADDING NAVWALKER CLASS
 if (!file_exists(get_template_directory() . '/class-wp-bootstrap-navwalker.php')) {
     return new WP_Error('class-wp-bootstrap-navwalker-missing', __('It appears the class-wp-bootstrap-navwalker.php file may be missing.', 'wp-bootstrap-navwalker'));

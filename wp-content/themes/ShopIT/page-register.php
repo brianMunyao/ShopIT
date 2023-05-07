@@ -1,3 +1,37 @@
+<?php
+$error = '';
+
+if (isset($_POST['submit'])) {
+    $fullname = $_POST['fullname'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $password = $_POST['password'];
+
+    $user_id = wp_create_user($email, $password, $email);
+
+    if (!is_wp_error($user_id)) {
+        update_user_meta($user_id, 'fullname', $fullname);
+        update_user_meta($user_id, 'phone', $phone);
+
+        $user = wp_signon([
+            'user_login' => $email,
+            'user_password' => $password
+        ]);
+
+        if (!is_wp_error($user)) {
+            wp_set_current_user($user->ID);
+            wp_set_auth_cookie($user->ID);
+            do_action('wp_login', $user->user_login, $user);
+
+            wp_redirect(home_url());
+            exit;
+        }
+    } else {
+        $error = 'Server error';
+    }
+}
+?>
+
 <form method="post" action="">
     <div class="custom-form">
         <?php get_header(); ?>
