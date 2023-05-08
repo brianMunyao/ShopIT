@@ -28,32 +28,64 @@
 
     <?php
     } else {
+        $user = get_user_info();
+        var_dump($user);
+
+
+
+        // $user = wp_get_current_user();
+        // $email = $user->user_email;
+        // $id = $user->ID;
+
+        // $user_meta = get_user_meta($id);
+        // $fullname = $user_meta['fullname'][0];
+        // $names = explode(' ', $fullname);
+
+        // echo array_shift($names);
+        // var_dump($names);
+
+        // echo $names[0];
     ?>
+        <nav class="nav-main">
+            <a href="/shopit/">
+                <img src='<?php echo $logo_url; ?>' class="logo" alt='logo' />
+            </a>
+
+            <a href="#" class="nav-link">
+                <ion-icon name="person-outline"></ion-icon>
+
+                <span><?php echo $user['email']; ?></span>
+            </a>
+
+            <form action="logout.php">
+                <input type="submit" value="Logout">
+            </form>
+
+        </nav>
 
         <!-- NAVWALKER -->
-        <nav class="navbar navbar-expand-md navbar-light bg-light" role="navigation">
+        <!-- <nav class="navbar navbar-expand-md navbar-light bg-light" role="navigation">
             <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="<?php esc_attr_e('Toggle navigation', 'your-theme-slug'); ?>">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <a class="navbar-brand" href="/shopit/"><img src='<?php echo $logo_url; ?>' class="logo" alt='logo' /></a>
                 <?php
-                wp_nav_menu(
-                    array(
-                        'theme_location' => 'primary',
-                        'depth' => 2,
-                        'container' => 'div',
-                        'container_class' => 'collapse navbar-collapse',
-                        'container_id' => 'bs-example-navbar-collapse-1',
-                        'menu_class' => 'nav navbar-nav',
-                        'fallback_cb' => 'WP_Bootstrap_Navwalker::fallback',
-                        'walker' => new WP_Bootstrap_Navwalker(),
-                    )
-                );
+                // wp_nav_menu(
+                //     array(
+                //         'theme_location' => 'primary',
+                //         'depth' => 2,
+                //         'container' => 'div',
+                //         'container_class' => 'collapse navbar-collapse',
+                //         'container_id' => 'bs-example-navbar-collapse-1',
+                //         'menu_class' => 'nav navbar-nav',
+                //         'fallback_cb' => 'WP_Bootstrap_Navwalker::fallback',
+                //         'walker' => new WP_Bootstrap_Navwalker(),
+                //     )
+                // );
                 ?>
             </div>
-        </nav>
+        </nav> -->
 
     <?php
     }

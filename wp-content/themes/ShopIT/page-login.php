@@ -24,6 +24,7 @@ if (isset($_POST['submit'])) {
         wp_redirect(home_url());
         exit;
     }
+    echo "Server Error";
 }
 ?>
 
