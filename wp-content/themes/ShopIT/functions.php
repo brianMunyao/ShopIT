@@ -62,6 +62,11 @@ function products_post_type()
 }
 add_action('init', 'products_post_type');
 
+// ADDING CUSTOM FIELDS
+
+
+
+//ADDING THE CATEGORIES
 
 function categories_taxonomy()
 {
