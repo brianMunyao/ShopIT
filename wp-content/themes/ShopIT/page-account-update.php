@@ -8,7 +8,7 @@
         <div class="bg-light pt-4 ps-4 d-flex align-items-center justify-content-start">
             <div class="bg-white rounded pt-4 pb-3 pe-3 ps-3 d-flex flex-column justify-content-center align-items-center shadow-sm rounded-1 border mb-4 me-4">
                 <div class="mx-auto text-center mb-3">
-                    <h2 class="fw-bold">Update Your Information</h2>
+                    <h3 class="fw-bold">Update Your Information</h3>
                 </div>
 
 
@@ -27,7 +27,7 @@
                             <label for="email">Email</label>
                             <div>
                                 <ion-icon name="mail-outline"></ion-icon>
-                                <input class="" type="email" name="email" placeholder="Enter your email" required />
+                                <input class="" type="email" name="email" placeholder="Enter your email" value="<?php echo $user['email']; ?>" required />
                             </div>
                         </div>
                         <div class="input-con">
