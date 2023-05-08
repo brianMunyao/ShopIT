@@ -157,5 +157,17 @@
         </div>
     </div>
 
+    <?php
+  $product_price = get_post_meta(get_the_ID(), 'product_price', true);
+  $product_sku = get_post_meta(get_the_ID(), 'product_sku', true);
+?>
+
+<div class="product-price"><?php echo '$' . number_format($product_price, 2); ?></div>
+<div class="product-sku"><?php echo 'SKU: ' . $product_sku; ?></div>
+
+
 </div>
+
+
+
 <?php get_footer(); ?>
