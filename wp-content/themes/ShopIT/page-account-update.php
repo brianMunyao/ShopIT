@@ -5,7 +5,7 @@ if (have_posts()) :
     while (have_posts()) : the_post();
 ?>
         <div class="bg-light pt-4 ps-4 d-flex align-items-center justify-content-start">
-            <div class="bg-white rounded pt-4 pb-3 pe-3 ps-3 d-flex flex-column justify-content-center align-items-center shadow-sm rounded-1 border">
+            <div class="bg-white rounded pt-4 pb-3 pe-3 ps-3 d-flex flex-column justify-content-center align-items-center shadow-sm rounded-1 border mb-4">
                 <div class="mx-auto text-center mb-3">
                     <h2 class="fw-bold">Update Your Information</h2>
                 </div>
