@@ -10,6 +10,7 @@ function shopit_theme_script_enqueue()
     wp_enqueue_script('jsbootstrap');
 
     wp_enqueue_style('style', get_template_directory_uri() . '/style.css', [], '1.0', 'all');
+    wp_enqueue_script('main-script', get_template_directory_uri() . '/script.js', [], false, true);
 }
 
 add_action('wp_enqueue_scripts', 'shopit_theme_script_enqueue');
@@ -51,7 +52,7 @@ function products_post_type()
         'query_variable' => true,
         'rewrite' => array('slug' => 'products'),
         'capability' => 'post',
-        'supports' => array('title', 'editor', 'categories', 'author', 'thumbnail', 'comments'),
+        'supports' => array('title', 'editor', 'categories', 'author', 'thumbnail', 'comments', 'custom-fields'),
         'menu_icon' => 'dashicons-tag',
         // 'taxonomies' => [
         //     'product_group'

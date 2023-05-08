@@ -75,7 +75,7 @@ if (isset($_POST['submit'])) {
                 </div>
             </div>
 
-            <button class="custom-btn" name="submit" type="submit">SUBMIT</button>
+            <button class="custom-btn" name="submit" type="submit">REGISTER</button>
 
             <p class="form-alt-text">
                 Already have an account? <a href="/shopit/login">Login</a>
