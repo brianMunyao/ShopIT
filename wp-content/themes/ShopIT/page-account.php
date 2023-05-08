@@ -3,6 +3,8 @@
 <?php
 if (have_posts()) :
     while (have_posts()) : the_post();
+
+        $user = get_user_info();
 ?>
 
         <div class="container-fluid bg-light pt-3">
@@ -15,7 +17,7 @@ if (have_posts()) :
                     <div class="d-flex flex-column">
                         <div class="d-flex justify-content-end pe-5 align-items-center gap-1">
                             <ion-icon name="pencil" class="text-primary"></ion-icon>
-                            <a href="#" class="link-primary text-decoration-none cursor-pointer">Edit</a>
+                            <a href="http://localhost/shopit/account-update/" class="link-primary text-decoration-none cursor-pointer">Edit</a>
                         </div>
                         <div class="d-flex flex-row gap-5 align-items-center justify-content-start ps-3">
                             <div class="fw-bold text-start">
@@ -28,7 +30,7 @@ if (have_posts()) :
                             <div class="text-start">
                                 <ul class="list-unstyled">
                                     <li>John Doe</li>
-                                    <li>john@yahoo.org</li>
+                                    <li><?php echo $user['email']; ?></li>
                                     <li>+254700001111</li>
                                 </ul>
                             </div>
