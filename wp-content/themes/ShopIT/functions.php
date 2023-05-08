@@ -115,23 +115,19 @@ function get_user_info()
 {
     $curr_user = [];
     $user = wp_get_current_user();
-    $id = $user->ID;
-
     $curr_user['email'] = $user->user_email;
+    $id = $user->ID;
     $curr_user['id'] = $user->ID;
 
-    $user_meta = get_user_meta($id);
-    $fullname = $user_meta['fullname'][0];
-    $curr_user['fullname'] = $fullname;
+    if (!current_user_can('manage_options')) {
+        $user_meta = get_user_meta($id);
+        $fullname = $user_meta['fullname'][0];
+        $curr_user['fullname'] = $fullname;
 
-    $curr_user['phone'] = $user_meta['phone'][0];
-
-    $names = explode(' ', $fullname);
-
-
-
-    // echo array_shift($names);
-    // var_dump($names);
-
+        $curr_user['phone'] = $user_meta['phone'][0];
+    } else {
+        $curr_user['fullname'] = 'Admin';
+        $curr_user['phone'] = 'N/A';
+    }
     return $curr_user;
 }
