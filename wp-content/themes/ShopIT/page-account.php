@@ -7,7 +7,7 @@ if (have_posts()) :
 
         <div class="container-fluid bg-light pt-3">
             <div class="row justify-content-start align-items-center h-100">
-                <div class="col-lg-6 col-md-8 col-sm-10 bg-white pt-2 pb-2 ms-4 shadow-sm rounded-1 border">
+                <div class="col-lg-6 col-md-8 col-sm-10 bg-white pt-2 pb-2 ms-4 shadow-sm rounded-1 border mb-4">
                     <div>
                         <h5 class="fw-bold text-center">Account Information</h5>
                     </div>
