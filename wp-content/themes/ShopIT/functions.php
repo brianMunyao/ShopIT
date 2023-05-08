@@ -109,3 +109,29 @@ if (!file_exists(get_template_directory() . '/class-wp-bootstrap-navwalker.php')
     require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
 }
 add_action('init', 'shopit_theme_setup');
+
+
+function get_user_info()
+{
+    $curr_user = [];
+    $user = wp_get_current_user();
+    $id = $user->ID;
+
+    $curr_user['email'] = $user->user_email;
+    $curr_user['id'] = $user->ID;
+
+    $user_meta = get_user_meta($id);
+    $fullname = $user_meta['fullname'][0];
+    $curr_user['fullname'] = $fullname;
+
+    $curr_user['phone'] = $user_meta['phone'][0];
+
+    $names = explode(' ', $fullname);
+
+
+
+    // echo array_shift($names);
+    // var_dump($names);
+
+    return $curr_user;
+}
