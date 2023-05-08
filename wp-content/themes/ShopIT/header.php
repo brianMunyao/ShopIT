@@ -12,59 +12,132 @@
 </head>
 
 <body>
+    <div class="overall-nav">
 
-    <?php
+        <?php
 
-    $slug = basename(get_permalink());
-    $logo_url = get_template_directory_uri() . "/assets/logo-cart.png";
+        $slug = basename(get_permalink());
+        $logo_url = get_template_directory_uri() . "/assets/logo-cart.png";
 
-    if ($slug == 'register' || $slug == 'login') {
-    ?>
-        <nav class="nav-login">
-            <a href="/shopit/">
-                <img src='<?php echo $logo_url; ?>' class="logo" alt='logo' />
-            </a>
-        </nav>
+        if ($slug == 'register' || $slug == 'login') {
+        ?>
+            <nav class="nav-login">
+                <a href="/shopit/">
+                    <img src='<?php echo $logo_url; ?>' class="logo" alt='logo' />
+                </a>
+            </nav>
 
-    <?php
-    } else {
-        $user = get_user_info();
-        var_dump($user);
+        <?php
+        } else {
+            if (is_user_logged_in()) {
+                $user = get_user_info();
+                $fullname = $user['fullname'];
+                $names = explode(' ', $fullname);
+
+                $firstname = $names[0];
+            }
 
 
 
-        // $user = wp_get_current_user();
-        // $email = $user->user_email;
-        // $id = $user->ID;
 
-        // $user_meta = get_user_meta($id);
-        // $fullname = $user_meta['fullname'][0];
-        // $names = explode(' ', $fullname);
+            // $user = wp_get_current_user();
+            // $email = $user->user_email;
+            // $id = $user->ID;
 
-        // echo array_shift($names);
-        // var_dump($names);
+            // $user_meta = get_user_meta($id);
+            // $fullname = $user_meta['fullname'][0];
+            // $names = explode(' ', $fullname);
 
-        // echo $names[0];
-    ?>
-        <nav class="nav-main">
-            <a href="/shopit/">
-                <img src='<?php echo $logo_url; ?>' class="logo" alt='logo' />
-            </a>
+            // echo array_shift($names);
+            // var_dump($names);
 
-            <a href="#" class="nav-link">
-                <ion-icon name="person-outline"></ion-icon>
+            // echo $names[0];
+        ?>
+            <nav class="nav-main">
+                <a href="/shopit/">
+                    <img src='<?php echo $logo_url; ?>' class="logo" alt='logo' />
+                </a>
 
-                <span><?php echo $user['email']; ?></span>
-            </a>
+                <div class="nav-search-con">
+                    <div class="nav-dropdown">
+                        <button class="nav-dropbtn">Categories <ion-icon name="caret-down"></ion-icon></button>
+                        <div class="nav-dropdown-content">
+                            <a href="#">Computing</a>
+                            <a href="#">TV, Audio & Video</a>
+                            <a href="#">Phone & Accessories</a>
+                            <a href="#">Appliances</a>
+                        </div>
+                    </div>
+                    <div class="search-con">
+                        <input type="text" placeholder="What are you looking for?">
+                        <ion-icon name="search"></ion-icon>
+                    </div>
+                </div>
 
-            <form action="logout.php">
-                <input type="submit" value="Logout">
-            </form>
+                <div class="nav-right-links">
+                    <div class="nav-btn" id="account-btn">
+                        <ion-icon name="person-outline"></ion-icon>
 
-        </nav>
+                        <span><?php
+                                echo (is_user_logged_in()) ?  $firstname : "Account";
+                                ?></span>
+                    </div>
 
-        <!-- NAVWALKER -->
-        <!-- <nav class="navbar navbar-expand-md navbar-light bg-light" role="navigation">
+                    <a href="/shopit/cart">
+                        <div class="nav-btn" id="cart-btn">
+                            <ion-icon name="cart-outline"></ion-icon>
+
+                            <span>Cart</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="account-drop" id="account-drop">
+                    <a href="/shopit/account">
+                        <ion-icon name="person-outline"></ion-icon>
+                        Account
+                    </a>
+                    <a href="/shopit/#">
+                        <ion-icon name="storefront-outline"></ion-icon>
+                        Orders
+                    </a>
+
+                    <?php
+                    if (is_user_logged_in()) {
+                    ?>
+                        <input class="custom-btn" type="submit" value="Logout">
+                    <?php
+                    } else {
+                    ?>
+                        <button class="custom-btn">SIGNIN</button>
+                    <?php
+                    }
+                    ?>
+
+                </div>
+
+            </nav>
+
+            <div class="nav-bottom">
+                <div class="nav-search-con">
+                    <div class="nav-dropdown">
+                        <button class="nav-dropbtn">Categories <ion-icon name="caret-down"></ion-icon></button>
+                        <div class="nav-dropdown-content">
+                            <a href="#">Computing</a>
+                            <a href="#">TV, Audio & Video</a>
+                            <a href="#">Phone & Accessories</a>
+                            <a href="#">Appliances</a>
+                        </div>
+                    </div>
+                    <div class="search-con">
+                        <input type="text" placeholder="What are you looking for?">
+                        <ion-icon name="search"></ion-icon>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NAVWALKER -->
+            <!-- <nav class="navbar navbar-expand-md navbar-light bg-light" role="navigation">
             <div class="container">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="<?php esc_attr_e('Toggle navigation', 'your-theme-slug'); ?>">
                     <span class="navbar-toggler-icon"></span>
@@ -87,7 +160,8 @@
             </div>
         </nav> -->
 
-    <?php
-    }
+        <?php
+        }
 
-    ?>
+        ?>
+    </div>

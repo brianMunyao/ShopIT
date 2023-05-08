@@ -43,7 +43,7 @@ $tv_url = get_template_directory_uri() . "/assets/sony-tv.png";
 
         <div class="products-section-content">
             <?php
-            for ($i = 0; $i < 12; $i++) {
+            for ($i = 0; $i < 9; $i++) {
             ?>
                 <div class="product">
                     <div class="product-img">
