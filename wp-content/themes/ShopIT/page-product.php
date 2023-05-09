@@ -1,4 +1,15 @@
 <?php get_header(); ?>
+<?php 
+    $id = $_GET['id'];
+    global $wpdb;
+
+    $data = $wpdb->get_results("SELECT * FROM wp_products WHERE p_id=$id");
+
+    
+    
+?>
+<pre><?php var_dump($data[0]->product_name); ?></pre>
+<img src="<?php echo $data[0]->product_image;?>" alt="">
 
 <div class=" my-2 bg-light text-dark --bs-secondary-color-rgb">
     <div class=" row grid gap-5  px-4  mb-5 ">
