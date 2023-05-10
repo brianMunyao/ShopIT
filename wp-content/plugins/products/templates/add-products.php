@@ -7,8 +7,13 @@
             <input type="text" style="width:100%;" placeholder="Enter product name" name="p_name" required>
         </div>
         <div>
+            <label>Product Brand: </label><br>
+            <input type="text" style="width:100%;" placeholder="Enter product brand" name="p_brand" required><br>
+
+        </div>
+        <div>
             <label>Product Description: </label><br>
-            <input type="text" style="width:100%;" placeholder="Enter product price" name="p_desc" required><br>
+            <input type="text" style="width:100%;" placeholder="Enter product description" name="p_desc" required><br>
 
         </div>
         <div>
