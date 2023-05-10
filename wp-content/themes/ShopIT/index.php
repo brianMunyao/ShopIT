@@ -1,11 +1,15 @@
 <?php get_header(); ?>
 <?php
 $tv_url = get_template_directory_uri() . "/assets/sony-tv.png";
+
+global $wpdb;
+
+$products = $wpdb->get_results("SELECT * FROM wp_products");
 ?>
 
 <div class="home-container">
     <div class="home-hero">
-        <div class="categories">
+        <!-- <div class="categories">
             <p>Categories</p>
             <div>
                 <a href="#">
@@ -21,7 +25,7 @@ $tv_url = get_template_directory_uri() . "/assets/sony-tv.png";
                     <div>Appliances</div>
                 </a>
             </div>
-        </div>
+        </div> -->
 
         <div class="top-deal">
 
@@ -38,35 +42,40 @@ $tv_url = get_template_directory_uri() . "/assets/sony-tv.png";
     <div class="products-section">
         <div class="products-section-header">
             <span>Phone Accessories</span>
-            <!-- <span>Phone</span> -->
+            <a href="/shopit/products">See All <ion-icon name='arrow-forward'></ion-icon></a>
         </div>
 
         <div class="products-section-content">
             <?php
-            for ($i = 0; $i < 9; $i++) {
+            for ($i = 0; $i < count($products); $i++) {
             ?>
-                <div class="product">
-                    <div class="product-img">
-                        <img src="<?php echo $tv_url; ?>" alt="sony-tv">
-                    </div>
+                <a href="<?php echo "/shopit/product?id={$products[$i]->p_id}" ?>">
+                    <div class="product">
+                        <div class="product-img">
+                            <img src="<?php echo $products[$i]->product_image; ?>" alt="product">
 
-                    <div class="product-info">
-                        <p class="product-name">
-                            SONY 65" Class CU7000B Crystal UHD 4K UHD Smart TV UN65CU7000BXZA 2023
-                        </p>
-                        <p class="product-price">
-                            Ksh. 5,499
-                        </p>
-                        <p class="product-price-original">
-                            Ksh. 6,499
-                        </p>
-                    </div>
+                        </div>
 
-                    <!-- <button class="custom-btn" onclick="">ADD TO CART</button> -->
-                </div>
+                        <div class="product-info">
+                            <p class="product-name">
+                                <?php echo $products[$i]->product_name; ?>
+                            </p>
+                            <p class="product-price">
+                                <?php echo add_commas($products[$i]->product_price); ?>
+                            </p>
+                            <p class="product-price-original">
+                                <?php echo  add_commas($products[$i]->initial_price); ?>
+                            </p>
+                        </div>
+
+                        <!-- <button class="custom-btn" onclick="">ADD TO CART</button> -->
+                    </div>
+                </a>
             <?php
             }
             ?>
+
+
         </div>
     </div>
 
@@ -115,7 +124,7 @@ $tv_url = get_template_directory_uri() . "/assets/sony-tv.png";
 
         <div class="products-section-content">
             <?php
-            for ($i = 0; $i < 12; $i++) {
+            for ($i = 0; $i < 6; $i++) {
             ?>
                 <div class="product">
                     <div class="product-img">

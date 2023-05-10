@@ -137,3 +137,26 @@ function get_user_info()
     }
     return $curr_user;
 }
+
+/*
+*/
+function update_user_info($user_id, $meta_key, $meta_value)
+{
+    try {
+
+        if (isset($meta_value)) {
+            $res = update_user_meta($user_id, $meta_key, $meta_value);
+
+            return $res ? true : false;
+        }
+        return false;
+    } catch (Exception $e) {
+        echo 'Error Updating user info';
+        return false;
+    }
+}
+
+function add_commas($val)
+{
+    return 'Ksh ' . number_format($val, 0, '.', ',');
+}

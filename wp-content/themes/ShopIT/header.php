@@ -19,6 +19,9 @@
         $slug = basename(get_permalink());
         $logo_url = get_template_directory_uri() . "/assets/logo-cart.png";
 
+        $searchterm = isset($_GET['q']) ? $_GET['q'] : '';
+        $category = isset($_GET['cat']) ? $_GET['cat'] : '';
+
         if ($slug == 'register' || $slug == 'login') {
         ?>
             <nav class="nav-login">
@@ -36,25 +39,9 @@
 
                 $firstname = $names[0];
             }
-
-
-
-
-            // $user = wp_get_current_user();
-            // $email = $user->user_email;
-            // $id = $user->ID;
-
-            // $user_meta = get_user_meta($id);
-            // $fullname = $user_meta['fullname'][0];
-            // $names = explode(' ', $fullname);
-
-            // echo array_shift($names);
-            // var_dump($names);
-
-            // echo $names[0];
         ?>
             <nav class="nav-main">
-                <a href="/shopit/">
+                <a href="/shopit">
                     <img src='<?php echo $logo_url; ?>' class="logo" alt='logo' />
                 </a>
 
@@ -62,17 +49,20 @@
                     <div class="nav-dropdown">
                         <button class="nav-dropbtn">Categories <ion-icon name="caret-down"></ion-icon></button>
                         <div class="nav-dropdown-content">
-                            <a href="#">Computing</a>
-                            <a href="#">TV, Audio & Video</a>
-                            <a href="#">Phone & Accessories</a>
-                            <a href="#">Appliances</a>
+                            <a href="/shopit/products?cat=computing">Computing</a>
+                            <a href="/shopit/products?cat=tv, audio and video">TV, Audio & Video</a>
+                            <a href="/shopit/products?cat=phone and accessories">Phone & Accessories</a>
+                            <a href="/shopit/products?cat=appliances">Appliances</a>
                         </div>
                     </div>
-                    <div class="search-con">
-                        <input type="text" placeholder="What are you looking for?">
-                        <ion-icon name="search"></ion-icon>
-                    </div>
+                    <form role="search" action="/shopit/products" method="get">
+                        <div class="search-con">
+                            <input type="search" placeholder="What are you looking for?" name="q" value="<?php echo $searchterm; ?>">
+                            <ion-icon name="search"></ion-icon>
+                        </div>
+                    </form>
                 </div>
+                <input type="submit" style="position:absolute;height:0;width:0;display:none;" name="searchsubmit" />
 
                 <div class="nav-right-links">
                     <div class="nav-btn" id="account-btn">
@@ -93,23 +83,28 @@
                 </div>
 
                 <div class="account-drop" id="account-drop">
-                    <a href="/shopit/account">
+                    <a href="/shopit/account" class="ad">
                         <ion-icon name="person-outline"></ion-icon>
                         Account
                     </a>
-                    <a href="/shopit/#">
+                    <a href="/shopit/#" class="ad">
                         <ion-icon name="storefront-outline"></ion-icon>
                         Orders
                     </a>
 
                     <?php
                     if (is_user_logged_in()) {
-                    ?>
-                        <input class="custom-btn" type="submit" value="Logout">
+                    ?><form action="logout.php" method="POST">
+                            <input class="custom-btn" type="submit" value="Logout">
+                        </form>
                     <?php
                     } else {
                     ?>
-                        <button class="custom-btn">SIGNIN</button>
+                        <a href="/shopit/login">
+                            <button class="custom-btn">
+                                SIGNIN
+                            </button>
+                        </a>
                     <?php
                     }
                     ?>
@@ -123,16 +118,19 @@
                     <div class="nav-dropdown">
                         <button class="nav-dropbtn">Categories <ion-icon name="caret-down"></ion-icon></button>
                         <div class="nav-dropdown-content">
-                            <a href="#">Computing</a>
-                            <a href="#">TV, Audio & Video</a>
-                            <a href="#">Phone & Accessories</a>
-                            <a href="#">Appliances</a>
+                            <a href="/shopit/products?cat=computing">Computing</a>
+                            <a href="/shopit/products?cat=tv, audio and video">TV, Audio & Video</a>
+                            <a href="/shopit/products?cat=phone and accessories">Phone & Accessories</a>
+                            <a href="/shopit/products?cat=appliances">Appliances</a>
                         </div>
                     </div>
-                    <div class="search-con">
-                        <input type="text" placeholder="What are you looking for?">
-                        <ion-icon name="search"></ion-icon>
-                    </div>
+                    <form role="search" action="/shopit/products" method="get">
+                        <div class="search-con">
+                            <input type="search" placeholder="What are you looking for?" name="q" value="<?php echo $searchterm; ?>" />
+                            <ion-icon name="search"></ion-icon>
+                        </div>
+                        <input type="submit" style="position:absolute;height:0;width:0;display:none;" name="searchsubmit" />
+                    </form>
                 </div>
             </div>
 
