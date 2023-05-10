@@ -19,10 +19,13 @@ defined('ABSPATH') or die('Got you Mr. Hacker!');
 
 class AddProducts
 {
+    public static $error = '';
+    public static $success = '';
 
     function __construct()
     {
         $this->add_product_to_db();
+        $this->update_product_to_db();
     }
 
     function activateExternally()
@@ -100,6 +103,50 @@ class AddProducts
         }
     }
 
+    function update_product_to_db()
+    {
+        if (isset($_POST['submit_edit_product'])) {
+            global $wpdb;
+            $table_name = $wpdb->prefix . 'products';
+
+            $data = [
+                'product_name' => $_POST['p_name'],
+                'product_brand' => $_POST['p_brand'],
+                'product_description' => $_POST['p_desc'],
+                'product_category' => $_POST['p_category'],
+                'initial_price' => $_POST['init_price'],
+                'product_price' => $_POST['p_price'],
+                'product_SKU' => $_POST['p_SKU'],
+                'product_image' => $_POST['img_url'],
+            ];
+
+            $where = [
+                "p_id" => $_POST['p_id']
+            ];
+
+            $result = $wpdb->update($table_name, $data, $where);
+            AddProducts::$success = "Product updated";
+            AddProducts::$error = "Product not updated";
+            if ($result) {
+                AddProducts::$success = "Product updated";
+                sleep(3);
+                AddProducts::$success = "";
+                // echo "<script>
+                // alert('something');
+                // var search_span = document.getElementsByClassName('success-msg');
+                // search_span[0].style.display = 'block';
+                //     </script>";
+            } else {
+                AddProducts::$error = "Product not updated";
+                sleep(3);
+                AddProducts::$error = "";
+            }
+        }
+        // setTimeout(function() {
+        //     document.querySelector(".success").style.display = "none";
+        // }, 3000);
+    }
+
 
     function productsForm()
     {
@@ -107,12 +154,22 @@ class AddProducts
     }
     function add_admin_page()
     {
-        add_menu_page('Products Addition', 'Add products', 'manage_options', 'add_products', [$this, 'admin_index_cb'], 'dashicons-tag', 110);
+        add_menu_page('Products', 'All Products', 'manage_options', 'all_products', [$this, 'admin_index_cb'], 'dashicons-tag', 110);
+        add_submenu_page('all_products', 'Add A Product', "Add A Product", 'manage_options', 'add_products', [$this, 'admin_add_products_cb'], 111);
+        add_submenu_page(' ', 'Edit A Product', "Edit A Product", 'manage_options', 'edit_products', [$this, 'admin_edit_products_cb'], null);
     }
 
     function admin_index_cb()
     {
+        require_once plugin_dir_path(__FILE__) . 'templates/view-products.php';
+    }
+    function admin_add_products_cb()
+    {
         require_once plugin_dir_path(__FILE__) . 'templates/add-products.php';
+    }
+    function admin_edit_products_cb()
+    {
+        require_once plugin_dir_path(__FILE__) . 'templates/edit-products.php';
     }
 }
 
