@@ -1,3 +1,4 @@
+
 <?php get_header(); ?>
 
 <div class="p-3 mb-2 pt-5 bg-light text-dark ">
@@ -11,7 +12,7 @@
                 <div class="row">
                     <div class="col d-flex flex-row ">
                     
-                        <img src="<?php echo esc_url(get_template_directory_uri().'./pimages/sony.png') ?> " class="rounded float-start w-50 h-100" alt="...">
+                        <img src="<?php  ; ?>" class="rounded float-start w-50 h-100" alt="...">
 
                     </div>
                     <div class="col-6 pt-3">
