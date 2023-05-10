@@ -41,11 +41,12 @@ class AddProducts
     {
         global $wpdb;
 
-        $table_name = $wpdb->prefix.'products';
+        $table_name = $wpdb->prefix . 'products';
 
         $product_details = "CREATE TABLE IF NOT EXISTS " . $table_name . "(
             p_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
             product_name text NOT NULL,
+            product_brand text NOT NULL,
             product_description text NOT NULL,
             product_category text NOT NULL,
             initial_price int NOT NULL,
@@ -61,10 +62,11 @@ class AddProducts
     function add_product_to_db()
     {
         if (isset($_POST['submitbtn'])) {
-            
+
             $data = [
-              
+
                 'product_name' => $_POST['p_name'],
+                'product_brand' => $_POST['p_brand'],
                 'product_description' => $_POST['p_desc'],
                 'product_category' => $_POST['p_category'],
                 'initial_price' => $_POST['init_price'],
@@ -73,17 +75,18 @@ class AddProducts
                 'product_image' => $_POST['img_url'],
             ];
 
-           
+
             global $wpdb;
 
-            $table_name = $wpdb->prefix.'products';
-            
+            $table_name = $wpdb->prefix . 'products';
+
             $result = $wpdb->insert($table_name, $data, $format = NULL);
-            
+
             if ($result == true) {
                 echo "<script> alert('Product added successfully!');</script>";
 
                 $data['product_name'] = '';
+                $data['product_brand'] = '';
                 $data['product_description'] = '';
                 $data['product_category'] = '';
                 $data['initial_price'] = '';
@@ -94,7 +97,6 @@ class AddProducts
                 echo "<script>alert('Product not added!');</script>";
             }
         } else {
-           
         }
     }
 
@@ -110,7 +112,7 @@ class AddProducts
 
     function admin_index_cb()
     {
-        require_once plugin_dir_path(__FILE__).'templates/add-products.php';
+        require_once plugin_dir_path(__FILE__) . 'templates/add-products.php';
     }
 }
 
