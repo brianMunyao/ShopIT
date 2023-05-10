@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 /**
  * @package AddProducts
  */
@@ -26,6 +24,7 @@ class AddProducts
     {
         $this->add_product_to_db();
         $this->update_product_to_db();
+        $this->add_product_to_cart();
     }
 
     function activateExternally()
@@ -39,14 +38,14 @@ class AddProducts
         AddProductsDeactivate::deactivate();
     }
 
-    //CREATING THE TABLE IN DB 
+    //CREATING THE PRODUCTS TABLE IN DB 
     static function create_table_to_db()
     {
         global $wpdb;
 
         $table_name = $wpdb->prefix . 'products';
 
-        $product_details = "CREATE TABLE IF NOT EXISTS " . $table_name . "(
+        $products_details = "CREATE TABLE IF NOT EXISTS " . $table_name . "(
             p_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
             product_name text NOT NULL,
             product_brand text NOT NULL,
@@ -58,16 +57,16 @@ class AddProducts
             product_image text  NOT NULL
         );";
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-        dbDelta($product_details);
+        dbDelta($products_details);
     }
 
-    // ADDING STOCK
+    // ADDING PRODUCTS TO THE DB
     function add_product_to_db()
     {
         if (isset($_POST['submitbtn'])) {
 
             $data = [
-
+                'product_id' => $_POST['p_id'],
                 'product_name' => $_POST['p_name'],
                 'product_brand' => $_POST['p_brand'],
                 'product_description' => $_POST['p_desc'],
@@ -99,9 +98,40 @@ class AddProducts
             } else {
                 echo "<script>alert('Product not added!');</script>";
             }
-        } else {
         }
     }
+
+
+     //CREATING THE CART TABLE IN DB 
+     static function create_cart_table_to_db()
+     {
+         global $wpdb;
+ 
+         $table_name = $wpdb->prefix . 'cart';
+ 
+         $product_details = "CREATE TABLE IF NOT EXISTS " . $table_name . "(
+             p_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+             user_id int NOT NULL,
+             product_brand text NOT NULL,
+         );";
+         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+         dbDelta($product_details);
+     }
+
+
+     // ADDING A SINGLE PRODUCT TO THE CART TABLE IN DB
+     function add_product_to_cart()
+     {
+         if (isset($_POST['add_to_cart'])) {
+ 
+             $data = [
+                 'product_id' => $_POST['p_id'],
+                 'user_id' => $_POST['user_id'],
+                 'product_brand' => $_POST['p_brand'],
+             ]; 
+             
+         }
+     }
 
     function update_product_to_db()
     {
