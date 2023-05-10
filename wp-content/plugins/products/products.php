@@ -1,5 +1,6 @@
 <?php
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 /**
  * @package AddProducts
  */
@@ -14,7 +15,7 @@
   */
 
 //security check
-defined('ABSPATH') or die('Got you Mr. "Hacker"!');
+defined('ABSPATH') or die('Got you Mr. Hacker!');
 
 class AddProducts
 {
@@ -22,7 +23,6 @@ class AddProducts
     function __construct()
     {
         $this->add_product_to_db();
-
     }
 
     function activateExternally()
@@ -41,14 +41,14 @@ class AddProducts
     {
         global $wpdb;
 
-        $table_name = $wpdb->prefix . 'products';
+        $table_name = $wpdb->prefix.'products';
 
         $product_details = "CREATE TABLE IF NOT EXISTS " . $table_name . "(
             p_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
             product_name text NOT NULL,
             product_description text NOT NULL,
             product_category text NOT NULL,
-            initial_price text NOT NULL,
+            initial_price int NOT NULL,
             product_price int NOT NULL,
             product_SKU text NOT NULL,
             product_image text  NOT NULL
@@ -61,8 +61,9 @@ class AddProducts
     function add_product_to_db()
     {
         if (isset($_POST['submitbtn'])) {
-            var_dump($_POST);
+            
             $data = [
+              
                 'product_name' => $_POST['p_name'],
                 'product_description' => $_POST['p_desc'],
                 'product_category' => $_POST['p_category'],
@@ -72,12 +73,13 @@ class AddProducts
                 'product_image' => $_POST['img_url'],
             ];
 
+           
             global $wpdb;
 
-            $table_name = $wpdb->prefix . 'products';
-
+            $table_name = $wpdb->prefix.'products';
+            
             $result = $wpdb->insert($table_name, $data, $format = NULL);
-
+            
             if ($result == true) {
                 echo "<script> alert('Product added successfully!');</script>";
 
@@ -92,23 +94,23 @@ class AddProducts
                 echo "<script>alert('Product not added!');</script>";
             }
         } else {
-            // echo "<script>alert('All fields are required');</script>";
+           
         }
     }
 
- 
-    function product_form()
+
+    function productsForm()
     {
-        add_action('add_menu', 'add_admin_page');
+        add_action('admin_menu', [$this, 'add_admin_page']);
     }
     function add_admin_page()
     {
-        add_menu_page('Add Products', 'Add stock', 'manage_options', 'add_products', [$this, 'admin_index_callback'], 'dashicons-tag', 100);
+        add_menu_page('Products Addition', 'Add products', 'manage_options', 'add_products', [$this, 'admin_index_cb'], 'dashicons-tag', 110);
     }
 
-    function admin_index_callback()
+    function admin_index_cb()
     {
-        require_once plugin_dir_path(__FILE__) . 'templates/products.php';
+        require_once plugin_dir_path(__FILE__).'templates/add-products.php';
     }
 }
 
@@ -122,3 +124,6 @@ $AddProductsInstance->activateExternally();
 
 //DEACTIVATE PLUGIN
 $AddProductsInstance->deactivateExternally();
+
+//REGISTER 
+$AddProductsInstance->productsForm();
