@@ -10,8 +10,8 @@ if (!is_user_logged_in()) {
 $user = get_user_info();
 ?>
 
-<div class="container-fluid bg-light pt-3">
-    <div class="row justify-content-start align-items-center h-100">
+<div class="container-fluid bg-light pt-5 pb-5">
+    <div class="row justify-content-center align-items-center h-100">
         <div class="col-lg-6 col-md-8 col-sm-10 bg-white pt-2 pb-2 ms-4 shadow-sm rounded-1 border mb-4">
             <div>
                 <h5 class="fw-bold text-center">Account Information</h5>
@@ -32,9 +32,9 @@ $user = get_user_info();
                     </div>
                     <div class="text-start">
                         <ul class="list-unstyled">
-                            <li>John Doe</li>
+                            <li><?php echo $user['fullname']; ?></li>
                             <li><?php echo $user['email']; ?></li>
-                            <li>+254700001111</li>
+                            <li><?php echo $user['phone']; ?></li>
                         </ul>
                     </div>
                 </div>
@@ -46,8 +46,7 @@ $user = get_user_info();
             <hr>
             <div class="d-flex flex-column lh-1 ps-3">
                 <h6 class="fw-bold">Default shipping address:</h6>
-                <p>Nairobi</p>
-                <p>Dagoreti North/Upper Hill</p>
+                <p><?php echo $user['address']; ?></p>
             </div>
         </div>
     </div>

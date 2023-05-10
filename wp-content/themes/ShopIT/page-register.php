@@ -16,6 +16,7 @@ if (isset($_POST['submit'])) {
     if (!is_wp_error($user_id)) {
         update_user_meta($user_id, 'fullname', $fullname);
         update_user_meta($user_id, 'phone', $phone);
+        update_user_meta($user_id, 'address', '');
 
         $user = wp_signon([
             'user_login' => $email,
@@ -31,7 +32,8 @@ if (isset($_POST['submit'])) {
             exit;
         }
     } else {
-        $error = 'Server error';
+
+        $error = "Invalid username or password";
     }
 }
 ?>
@@ -43,6 +45,11 @@ if (isset($_POST['submit'])) {
         <div class="form-con">
 
             <h2>Register</h2>
+
+            <?php
+            echo "<p class='form-error'>" . $error . "</p>";
+            ?>
+
 
             <div class="input-con">
                 <label for="fullname">Fullname</label>

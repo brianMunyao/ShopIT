@@ -87,11 +87,6 @@
                         <ion-icon name="person-outline"></ion-icon>
                         Account
                     </a>
-                    <a href="/shopit/#" class="ad">
-                        <ion-icon name="storefront-outline"></ion-icon>
-                        Orders
-                    </a>
-
                     <?php
                     if (is_user_logged_in()) {
                     ?><form action="logout.php" method="POST">

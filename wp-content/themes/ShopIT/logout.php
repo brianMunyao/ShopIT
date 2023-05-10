@@ -1,5 +1,6 @@
 <?php
 wp_logout();
-wp_destroy_current_session();
-wp_clear_auth_cookie();
-header("location: index.php");
+
+// Redirect the user to the home page
+wp_redirect(home_url());
+exit;
