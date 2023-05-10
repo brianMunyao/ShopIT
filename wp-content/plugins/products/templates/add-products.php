@@ -17,9 +17,9 @@
 
         </div>
         <div>
-            <label>Category:</label> </label><br>
-            <select name="p_category" id="" style="width:100%">
-                <option value="Select Category">Select Category</option>
+            <label>Category:</label><br>
+            <select name="p_category" id="" style="width:100%" required>
+                <option value="Select Category" selected disabled hidden>Select Category</option>
                 <option value="Computing">Computing</option>
                 <option value="TV, Audio and Video">TV, Audio & Video</option>
                 <option value="Phone and Accessories">Phone & Accessories</option>
@@ -46,6 +46,6 @@
             <input type="text" style="width:100%; margin-bottom: 5px;" placeholder="Enter url" name="img_url" required>
         </div>
 
-        <button type="submit" style="width:100%; background-color:#0071DC; color:white; padding:7px; border-radius: 5px; font-size: 14px; border: none; " name="submitbtn">Submit</button>
+        <button type="submit" style="width:100%; background-color:#0071DC; color:white; padding:7px; border-radius: 5px; font-size: 14px; border: none; margin-top:10px;" name="submitbtn">Submit</button>
     </form>
 </div>
