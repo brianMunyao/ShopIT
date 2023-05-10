@@ -1,6 +1,8 @@
 <?php get_header(); ?>
 <?php
-$tv_url = get_template_directory_uri() . "/assets/sony-tv.png";
+$hero_url = get_template_directory_uri() . "/assets/hero-img.png";
+$microwave = get_template_directory_uri() . "/assets/microwave.png";
+$refrigerator = get_template_directory_uri() . "/assets/refrigerator.png";
 
 global $wpdb;
 
@@ -30,24 +32,29 @@ $products = $wpdb->get_results("SELECT * FROM wp_products");
         <div class="top-deal">
 
             <div class="top-deal-info">
-                <h2>BIG DEALS ON SCREENS</h2>
+                <h2>BIG DEALS ON ELECTRONICS</h2>
                 <p>Up to 20% OFF</p>
             </div>
 
-            <img src="<?php echo $tv_url; ?>" alt="sony-tv">
+            <img src="<?php echo $hero_url; ?>" alt="sony-tv">
 
         </div>
     </div>
 
     <div class="products-section">
+        <?php
+        $category = 'Phone and Accessories';
+        $phone_accessories = $wpdb->get_results("SELECT * FROM wp_products WHERE product_category='$category'");
+
+        ?>
         <div class="products-section-header">
-            <span>Phone Accessories</span>
-            <a href="/shopit/products">See All <ion-icon name='arrow-forward'></ion-icon></a>
+            <span><?php echo $category; ?></span>
+            <a href='<?php echo "/shopit/products?cat=$category" ?>'>See All <ion-icon name='arrow-forward'></ion-icon></a>
         </div>
 
         <div class="products-section-content">
             <?php
-            for ($i = 0; $i < count($products); $i++) {
+            for ($i = 0; $i < min(10, count($phone_accessories)); $i++) {
             ?>
                 <a href="<?php echo "/shopit/product?id={$products[$i]->p_id}" ?>">
                     <div class="product">
@@ -64,7 +71,7 @@ $products = $wpdb->get_results("SELECT * FROM wp_products");
                                 <?php echo add_commas($products[$i]->product_price); ?>
                             </p>
                             <p class="product-price-original">
-                                <?php echo  add_commas($products[$i]->initial_price); ?>
+                                <?php echo add_commas($products[$i]->initial_price); ?>
                             </p>
                         </div>
 
@@ -87,64 +94,120 @@ $products = $wpdb->get_results("SELECT * FROM wp_products");
         </div>
 
         <div class="featured-section-content">
-            <?php
-            for ($i = 0; $i < 2; $i++) {
-            ?>
-                <div class="featured-product">
-
-
-                    <div class="product-info">
-                        <p class="product-category">
-                            TVS
-                        </p>
-                        <p class="low">As low as</p>
-                        <p class="product-price">
-                            Ksh. 20,000
-                        </p>
-                    </div>
-
-                    <div class="product-img">
-                        <img src="<?php echo $tv_url; ?>" alt="sony-tv">
-                    </div>
-
-                    <!-- <button class="custom-btn" onclick="">ADD TO CART</button> -->
+            <div class="featured-product">
+                <div class="product-info">
+                    <p class="product-category">
+                        Microwaves
+                    </p>
+                    <p class="low">As low as</p>
+                    <p class="product-price">
+                        Ksh. 10,000
+                    </p>
                 </div>
+
+                <div class="product-img">
+                    <img src="<?php echo $microwave; ?>" alt="microwave">
+                </div>
+            </div>
+            <div class="featured-product">
+                <div class="product-info">
+                    <p class="product-category">
+                        Refrigerators
+                    </p>
+                    <p class="low">As low as</p>
+                    <p class="product-price">
+                        Ksh. 20,000
+                    </p>
+                </div>
+
+                <div class="product-img">
+                    <img src="<?php echo $refrigerator; ?>" alt="re$refrigerator">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="products-section">
+        <?php
+        $category = 'Appliances';
+        $appliances = $wpdb->get_results("SELECT * FROM wp_products WHERE product_category='$category'");
+        ?>
+        <div class="products-section-header">
+            <span><?php echo $category; ?></span>
+            <a href='<?php echo "/shopit/products?cat=$category" ?>'>See All <ion-icon name='arrow-forward'></ion-icon></a>
+        </div>
+
+
+        <div class="products-section-content">
+            <?php
+            for ($i = 0; $i < min(6, count($appliances)); $i++) {
+            ?>
+                <a href="<?php echo "/shopit/product?id={$appliances[$i]->p_id}" ?>">
+                    <div class="product">
+                        <div class="product-img">
+                            <img src="<?php echo $appliances[$i]->product_image; ?>" alt="product">
+
+                        </div>
+
+                        <div class="product-info">
+                            <p class="product-name">
+                                <?php echo $appliances[$i]->product_name; ?>
+                            </p>
+                            <p class="product-price">
+                                <?php echo add_commas($appliances[$i]->product_price); ?>
+                            </p>
+                            <p class="product-price-original">
+                                <?php echo add_commas($appliances[$i]->initial_price); ?>
+                            </p>
+                        </div>
+
+                        <!-- <button class="custom-btn" onclick="">ADD TO CART</button> -->
+                    </div>
+                </a>
             <?php
             }
             ?>
         </div>
     </div>
 
-
     <div class="products-section">
+        <?php
+        $category = 'TV, Audio and Video';
+        $appliances = $wpdb->get_results("SELECT * FROM wp_products WHERE product_category='$category'");
+        ?>
         <div class="products-section-header">
-            <span>Phone Accessories</span>
-            <!-- <span>Phone</span> -->
+            <span><?php echo $category; ?></span>
+            <a href='<?php echo "/shopit/products?cat=$category" ?>'>See All <ion-icon name='arrow-forward'></ion-icon></a>
         </div>
+
 
         <div class="products-section-content">
             <?php
-            for ($i = 0; $i < 6; $i++) {
+            for ($i = 0; $i < min(6, count($appliances)); $i++) {
             ?>
-                <div class="product">
-                    <div class="product-img">
-                        <img src="<?php echo $tv_url; ?>" alt="sony-tv">
-                    </div>
+                <a href="<?php echo "/shopit/product?id={$appliances[$i]->p_id}" ?>">
+                    <div class="product">
+                        <div class="product-img">
+                            <img src="<?php echo $appliances[$i]->product_image; ?>" alt="product">
 
-                    <div class="product-info">
-                        <p class="product-name">
-                            SONY 65" Class CU7000B Crystal UHD 4K UHD Smart TV UN65CU7000BXZA 2023
-                        </p>
-                        <p class="product-price">
-                            Ksh. 5,499
-                        </p>
-                        <p class="product-price-original">
-                            Ksh. 6,499
-                        </p>
-                    </div>
+                        </div>
 
-                    <!-- <button class="custom-btn" onclick="">ADD TO CART</button> -->
-                </div>
+                        <div class="product-info">
+                            <p class="product-name">
+                                <?php echo $appliances[$i]->product_name; ?>
+                            </p>
+                            <p class="product-price">
+                                <?php echo add_commas($appliances[$i]->product_price); ?>
+                            </p>
+                            <p class="product-price-original">
+                                <?php echo add_commas($appliances[$i]->initial_price); ?>
+                            </p>
+                        </div>
+
+                        <!-- <button class="custom-btn" onclick="">ADD TO CART</button> -->
+                    </div>
+                </a>
             <?php
             }
             ?>

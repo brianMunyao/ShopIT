@@ -131,9 +131,11 @@ function get_user_info()
         $curr_user['fullname'] = $fullname;
 
         $curr_user['phone'] = $user_meta['phone'][0];
+        $curr_user['address'] = $user_meta['address'][0];
     } else {
         $curr_user['fullname'] = 'Admin';
         $curr_user['phone'] = 'N/A';
+        $curr_user['address'] = 'N/A';
     }
     return $curr_user;
 }
