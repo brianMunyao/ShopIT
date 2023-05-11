@@ -56,22 +56,22 @@ $products = $wpdb->get_results("SELECT * FROM wp_products");
             <?php
             for ($i = 0; $i < min(10, count($phone_accessories)); $i++) {
             ?>
-                <a href="<?php echo "/shopit/product?id={$products[$i]->p_id}" ?>">
+                <a href="<?php echo "/shopit/product?id={$phone_accessories[$i]->p_id}" ?>">
                     <div class="product">
                         <div class="product-img">
-                            <img src="<?php echo $products[$i]->product_image; ?>" alt="product">
+                            <img src="<?php echo $phone_accessories[$i]->product_image; ?>" alt="product">
 
                         </div>
 
                         <div class="product-info">
                             <p class="product-name">
-                                <?php echo $products[$i]->product_name; ?>
+                                <?php echo $phone_accessories[$i]->product_name; ?>
                             </p>
                             <p class="product-price">
-                                <?php echo add_commas($products[$i]->product_price); ?>
+                                <?php echo add_commas($phone_accessories[$i]->product_price); ?>
                             </p>
                             <p class="product-price-original">
-                                <?php echo add_commas($products[$i]->initial_price); ?>
+                                <?php echo add_commas($phone_accessories[$i]->initial_price); ?>
                             </p>
                         </div>
 
@@ -93,37 +93,42 @@ $products = $wpdb->get_results("SELECT * FROM wp_products");
             <!-- <span>Phone</span> -->
         </div>
 
+
         <div class="featured-section-content">
-            <div class="featured-product">
-                <div class="product-info">
-                    <p class="product-category">
-                        Microwaves
-                    </p>
-                    <p class="low">As low as</p>
-                    <p class="product-price">
-                        Ksh. 10,000
-                    </p>
-                </div>
+            <a href='<?php echo "/shopit/products?q=microwave"; ?>'>
+                <div class="featured-product">
+                    <div class="product-info">
+                        <p class="product-category">
+                            Microwaves
+                        </p>
+                        <p class="low">As low as</p>
+                        <p class="product-price">
+                            Ksh. 10,000
+                        </p>
+                    </div>
 
-                <div class="product-img">
-                    <img src="<?php echo $microwave; ?>" alt="microwave">
+                    <div class="product-img">
+                        <img src="<?php echo $microwave; ?>" alt="microwave">
+                    </div>
                 </div>
-            </div>
-            <div class="featured-product">
-                <div class="product-info">
-                    <p class="product-category">
-                        Refrigerators
-                    </p>
-                    <p class="low">As low as</p>
-                    <p class="product-price">
-                        Ksh. 20,000
-                    </p>
-                </div>
+            </a>
+            <a href='<?php echo "/shopit/products?q=refrigerator"; ?>'>
+                <div class="featured-product">
+                    <div class="product-info">
+                        <p class="product-category">
+                            Refrigerators
+                        </p>
+                        <p class="low">As low as</p>
+                        <p class="product-price">
+                            Ksh. 20,000
+                        </p>
+                    </div>
 
-                <div class="product-img">
-                    <img src="<?php echo $refrigerator; ?>" alt="re$refrigerator">
+                    <div class="product-img">
+                        <img src="<?php echo $refrigerator; ?>" alt="re$refrigerator">
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 
@@ -174,7 +179,7 @@ $products = $wpdb->get_results("SELECT * FROM wp_products");
     <div class="products-section">
         <?php
         $category = 'TV, Audio and Video';
-        $appliances = $wpdb->get_results("SELECT * FROM wp_products WHERE product_category='$category'");
+        $tv_audio = $wpdb->get_results("SELECT * FROM wp_products WHERE product_category='$category'");
         ?>
         <div class="products-section-header">
             <span><?php echo $category; ?></span>
@@ -184,24 +189,24 @@ $products = $wpdb->get_results("SELECT * FROM wp_products");
 
         <div class="products-section-content">
             <?php
-            for ($i = 0; $i < min(6, count($appliances)); $i++) {
+            for ($i = 0; $i < min(6, count($tv_audio)); $i++) {
             ?>
-                <a href="<?php echo "/shopit/product?id={$appliances[$i]->p_id}" ?>">
+                <a href="<?php echo "/shopit/product?id={$tv_audio[$i]->p_id}" ?>">
                     <div class="product">
                         <div class="product-img">
-                            <img src="<?php echo $appliances[$i]->product_image; ?>" alt="product">
+                            <img src="<?php echo $tv_audio[$i]->product_image; ?>" alt="product">
 
                         </div>
 
                         <div class="product-info">
                             <p class="product-name">
-                                <?php echo $appliances[$i]->product_name; ?>
+                                <?php echo $tv_audio[$i]->product_name; ?>
                             </p>
                             <p class="product-price">
-                                <?php echo add_commas($appliances[$i]->product_price); ?>
+                                <?php echo add_commas($tv_audio[$i]->product_price); ?>
                             </p>
                             <p class="product-price-original">
-                                <?php echo add_commas($appliances[$i]->initial_price); ?>
+                                <?php echo add_commas($tv_audio[$i]->initial_price); ?>
                             </p>
                         </div>
 

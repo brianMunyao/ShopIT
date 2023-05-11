@@ -590,7 +590,9 @@ footer .footer-bottom {
 	gap: 30px;
 	padding: 30px;
 }
+
 .featured-product {
+	height: 100%;
 	display: flex;
 	/* grid-template-columns: 1fr 2fr; */
 	align-items: center;
