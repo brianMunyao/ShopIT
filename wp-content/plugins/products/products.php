@@ -26,6 +26,9 @@ class AddProducts
         $this->add_product_to_db();
         $this->update_product_to_db();
         $this->add_product_to_cart();
+        $this->increase_item_in_cart();
+        $this->decrease_item_in_cart();
+        $this->remove_item_from_cart();
     }
 
     function activateExternally()
@@ -110,11 +113,11 @@ class AddProducts
 
         $table_name = $wpdb->prefix . 'cart';
 
-        $product_details = "CREATE TABLE IF NOT EXISTS " . $table_name . "(
+        $product_details = "CREATE TABLE IF NOT EXISTS " . $table_name . " (
              id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
              user_id int NOT NULL,
              p_id int NOT NULL,
-             quantity int NOT NULL,
+             quantity int NOT NULL
          );";
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         dbDelta($product_details);
@@ -139,7 +142,59 @@ class AddProducts
             $results = $wpdb->insert($table_name, $data);
 
             if (!$results) {
-                /git /error
+                // /git /error
+            }
+        }
+    }
+
+    function increase_item_in_cart()
+    {
+        if (isset($_POST['increase_item_in_cart'])) {
+            global $wpdb;
+
+            $table_name = $wpdb->prefix . 'cart';
+            $p_id = $_POST['p_id'];
+            $new_quantity = $_POST['increase_quantity'];
+            $results = $wpdb->query("UPDATE $table_name SET quantity=$new_quantity WHERE p_id=$p_id");
+
+            if (!$results) {
+                // /git /error
+            }
+        }
+    }
+    function decrease_item_in_cart()
+    {
+        if (isset($_POST['decrease_item_in_cart'])) {
+            global $wpdb;
+
+            $table_name = $wpdb->prefix . 'cart';
+            $p_id = $_POST['p_id'];
+            $new_quantity = $_POST['decrease_quantity'];
+
+            if ($new_quantity <= 0) {
+                $results = $wpdb->query("DELETE FROM $table_name WHERE p_id=$p_id");
+            } else {
+
+                $results = $wpdb->query("UPDATE $table_name SET quantity=$new_quantity WHERE p_id=$p_id");
+            }
+
+            if (!$results) {
+                // /git /error
+            }
+        }
+    }
+
+    function remove_item_from_cart()
+    {
+        if (isset($_POST['remove_from_cart'])) {
+            global $wpdb;
+
+            $table_name = $wpdb->prefix . 'cart';
+            $p_id = $_POST['p_id'];
+            $results = $wpdb->query("DELETE FROM $table_name WHERE p_id=$p_id");
+
+            if (!$results) {
+                // /git /error
             }
         }
     }

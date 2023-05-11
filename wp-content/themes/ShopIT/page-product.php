@@ -1,12 +1,20 @@
+<?php
+if (!is_user_logged_in()) wp_redirect(site_url('/login'));
+?>
 <?php get_header(); ?>
 <?php
 $id = $_GET['id'];
+
+$user = get_user_info();
+$user_id = $user['id'];
 
 global $wpdb;
 $table_name = $wpdb->prefix . "products";
 $data = $wpdb->get_results("SELECT * FROM $table_name WHERE p_id=$id");
 
-
+// 'user_id' => $_POST['user_id'],
+// 'p_id' => $_POST['p_id'],
+// 'quantity' => $_POST['quantity'],
 ?>
 
 <div class=" bg-light text-dark --bs-secondary-color-rgb w-100 overflow-hidden ">
@@ -27,7 +35,7 @@ $data = $wpdb->get_results("SELECT * FROM $table_name WHERE p_id=$id");
                 </div>
             </div>
         </div>
-        <div class=" col-md-3 p-4 mb-2 bg-white text-dark border shadow-sm h-50  ">
+        <div class=" col-md-3 p-4 mb-2 bg-white text-dark border shadow-sm">
             <div class="description">
                 <p>Brand: &nbsp; <?php echo $data[0]->product_brand; ?></p>
                 <h6><?php echo $data[0]->product_name; ?></h6>
@@ -39,13 +47,18 @@ $data = $wpdb->get_results("SELECT * FROM $table_name WHERE p_id=$id");
                     <ion-icon name="star"></ion-icon>
                     <ion-icon name="star"></ion-icon>
                 </div>
-                <p class="fw-bold"> Ksh.&nbsp;<?php echo $data[0]->product_price; ?></p>
-                <p class=""> <span class="text-decoration-line-through opacity-50">Ksh. &nbsp;
-                        <?php echo $data[0]->initial_price; ?>
-                    </span><span class="text-success"> &nbsp; -35% </span></p>
-                <div class="d-grid gap-2">
-                    <button class="btn btn-primary" name="add_to_cart" type="button">Add to Cart</button>
-                </div>
+                <p class="fw-bold"><?php echo add_commas($data[0]->product_price); ?></p>
+                <p class=""> <span class="text-decoration-line-through opacity-50"> <?php echo add_commas($data[0]->initial_price); ?>
+                    </span><span class="text-success"> &nbsp;-<?php echo floor((1 - ($data[0]->product_price / $data[0]->initial_price)) * 100); ?>%</span></p>
+
+                <form action="" method="post">
+                    <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+                    <input type="hidden" name="p_id" value="<?php echo $id; ?>">
+                    <input type="hidden" name="quantity" value="<?php echo 1; ?>">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" name="add_to_cart" type="submit">Add to Cart</button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -97,7 +110,7 @@ $data = $wpdb->get_results("SELECT * FROM $table_name WHERE p_id=$id");
 
         <div class="products-section">
             <?php
-            $appliances = $wpdb->get_results("SELECT * FROM wp_products WHERE product_category='{$data[0]->product_category}'");
+            $related_products = $wpdb->get_results("SELECT * FROM wp_products WHERE product_category='{$data[0]->product_category}' AND p_id!=$id");
             ?>
             <div class="products-section-header">
                 <span>You may also like</span>
@@ -106,24 +119,24 @@ $data = $wpdb->get_results("SELECT * FROM $table_name WHERE p_id=$id");
 
             <div class="products-section-content">
                 <?php
-                for ($i = 0; $i < min(6, count($appliances)); $i++) {
+                for ($i = 0; $i < min(4, count($related_products)); $i++) {
                 ?>
-                    <a href="<?php echo "/shopit/product?id={$appliances[$i]->p_id}" ?>">
+                    <a href="<?php echo "/shopit/product?id={$related_products[$i]->p_id}" ?>">
                         <div class="product">
                             <div class="product-img">
-                                <img src="<?php echo $appliances[$i]->product_image; ?>" alt="product">
+                                <img src="<?php echo $related_products[$i]->product_image; ?>" alt="product">
 
                             </div>
 
                             <div class="product-info">
                                 <p class="product-name">
-                                    <?php echo $appliances[$i]->product_name; ?>
+                                    <?php echo $related_products[$i]->product_name; ?>
                                 </p>
                                 <p class="product-price">
-                                    <?php echo add_commas($appliances[$i]->product_price); ?>
+                                    <?php echo add_commas($related_products[$i]->product_price); ?>
                                 </p>
                                 <p class="product-price-original">
-                                    <?php echo add_commas($appliances[$i]->initial_price); ?>
+                                    <?php echo add_commas($related_products[$i]->initial_price); ?>
                                 </p>
                             </div>
 
