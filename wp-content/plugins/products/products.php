@@ -70,7 +70,6 @@ class AddProducts
         if (isset($_POST['submitbtn'])) {
 
             $data = [
-                'product_id' => $_POST['p_id'],
                 'product_name' => $_POST['p_name'],
                 'product_brand' => $_POST['p_brand'],
                 'product_description' => $_POST['p_desc'],
