@@ -131,9 +131,11 @@ function get_user_info()
         $curr_user['fullname'] = $fullname;
 
         $curr_user['phone'] = $user_meta['phone'][0];
+        $curr_user['address'] = $user_meta['address'][0];
     } else {
         $curr_user['fullname'] = 'Admin';
         $curr_user['phone'] = 'N/A';
+        $curr_user['address'] = 'N/A';
     }
     return $curr_user;
 }
@@ -156,7 +158,20 @@ function update_user_info($user_id, $meta_key, $meta_value)
     }
 }
 
+// convert a plain int to currency display
 function add_commas($val)
 {
     return 'Ksh ' . number_format($val, 0, '.', ',');
+}
+
+// shorten strings that are longer that a given $max_length
+function shorten_string($string, $max_length)
+{
+    $short_string = substr($string, 0, $max_length);
+
+    if (strlen($string) > strlen($short_string)) {
+        $short_string .= '...';
+    }
+
+    return $short_string;
 }

@@ -38,6 +38,10 @@
                 $names = explode(' ', $fullname);
 
                 $firstname = $names[0];
+                $user_id = $user['id'];
+                global $wpdb;
+
+                $cart_items = $wpdb->get_results("SELECT * FROM wp_cart JOIN wp_products ON wp_products.p_id=wp_cart.p_id  WHERE user_id=$user_id");
             }
         ?>
             <nav class="nav-main">
@@ -77,7 +81,7 @@
                         <div class="nav-btn" id="cart-btn">
                             <ion-icon name="cart-outline"></ion-icon>
 
-                            <span>Cart</span>
+                            <span>Cart <?php echo is_user_logged_in() ? "(" . count($cart_items) . ")" : ''; ?></span>
                         </div>
                     </a>
                 </div>
@@ -87,11 +91,6 @@
                         <ion-icon name="person-outline"></ion-icon>
                         Account
                     </a>
-                    <a href="/shopit/#" class="ad">
-                        <ion-icon name="storefront-outline"></ion-icon>
-                        Orders
-                    </a>
-
                     <?php
                     if (is_user_logged_in()) {
                     ?><form action="logout.php" method="POST">

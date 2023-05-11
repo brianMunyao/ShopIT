@@ -1,38 +1,44 @@
-<?php get_header(); ?>
-<?php 
-    $id = $_GET['id'];
-    global $wpdb;
-
-    $data = $wpdb->get_results("SELECT * FROM wp_products WHERE p_id=$id");
-
-    
-    
+<?php
+if (!is_user_logged_in()) wp_redirect(site_url('/login'));
 ?>
-<pre><?php var_dump($data[0]->product_name); ?></pre>
-<img src="<?php echo $data[0]->product_image;?>" alt="">
+<?php get_header(); ?>
+<?php
+$id = $_GET['id'];
 
-<div class=" my-2 bg-light text-dark --bs-secondary-color-rgb">
-    <div class=" row grid gap-5  px-4  mb-5 ">
+$user = get_user_info();
+$user_id = $user['id'];
+
+global $wpdb;
+$table_name = $wpdb->prefix . "products";
+$data = $wpdb->get_results("SELECT * FROM $table_name WHERE p_id=$id");
+
+// 'user_id' => $_POST['user_id'],
+// 'p_id' => $_POST['p_id'],
+// 'quantity' => $_POST['quantity'],
+?>
+
+<div class=" bg-light text-dark --bs-secondary-color-rgb w-100 overflow-hidden ">
+    <div class=" row grid gap-5 ps-5  mb-5 mt-3">
         <div class="col-md-8  bg-white text-dark border shadow-sm ">
-            <div class="d-flex ">
+            <div class="d-flex">
                 <div class=" d-flex flex-row ">
-                    <picture class="d-flex flex-column  float-start p-images w-50 h-100">
-                        <source srcset="" type="image/svg+xml">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . './pimages/sony.png') ?> " class="w-50 h-25" alt="...">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . './pimages/sony.png') ?> " class="w-50 h-25" alt="...">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . './pimages/sony.png') ?> " class="w-50 h-25" alt="...">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . './pimages/sony.png') ?> " class="w-50 h-25" alt="...">
+                    <div class="d-flex flex-column ">
+                        <?php for ($i = 0; $i < 4; $i++) { ?>
+                            <picture class="d-flex flex-column  float-start p-images w-75 h-50 gap-2 lh-sm  ">
+                                <source srcset="" type="image/svg+xml">
+                                <img src="<?php echo $data[0]->product_image; ?> " class=" d-flex flex-column w-75 h-50" alt="...">
+                            </picture>
+                        <?php } ?>
+                    </div>
 
-                    </picture>
-
-                    <img src="<?php echo esc_url(get_template_directory_uri() . './pimages/sony.png') ?> " class="float-end w-100 h-100" alt="...">
+                    <img src="<?php echo $data[0]->product_image; ?> " class="float-end w-75 h-75" alt="...">
                 </div>
             </div>
         </div>
-        <div class=" col-md-3 p-4 mb-2 bg-white text-dark border shadow-sm h-50  ">
+        <div class=" col-md-3 p-4 mb-2 bg-white text-dark border shadow-sm">
             <div class="description">
-                <p>Brand: Sony</p>
-                <h6>SONY 65" Class CU7000B Crystal UHD 4K UHD Smart TV UN65CUCU7000BXZA 2023</h6>
+                <p>Brand: &nbsp; <?php echo $data[0]->product_brand; ?></p>
+                <h6><?php echo $data[0]->product_name; ?></h6>
                 <img src="/ShopIT/p-images/" alt="">
                 <div class="d-flex flex-row gap-row-2 stars">
                     <ion-icon name="star"></ion-icon>
@@ -41,13 +47,18 @@
                     <ion-icon name="star"></ion-icon>
                     <ion-icon name="star"></ion-icon>
                 </div>
-                <p class="fw-bold">KSh 39,799</p>
-                <p class=""> <span class="text-decoration-line-through opacity-50">
-                        KSh 42,999
-                    </span><span class="text-success"> &nbsp; -35% </span></p>
-                <div class="d-grid gap-2">
-                    <button class="btn btn-primary" type="button">Add to Cart</button>
-                </div>
+                <p class="fw-bold"><?php echo add_commas($data[0]->product_price); ?></p>
+                <p class=""> <span class="text-decoration-line-through opacity-50"> <?php echo add_commas($data[0]->initial_price); ?>
+                    </span><span class="text-success"> &nbsp;-<?php echo floor((1 - ($data[0]->product_price / $data[0]->initial_price)) * 100); ?>%</span></p>
+
+                <form action="" method="post">
+                    <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+                    <input type="hidden" name="p_id" value="<?php echo $id; ?>">
+                    <input type="hidden" name="quantity" value="<?php echo 1; ?>">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" name="add_to_cart" type="submit">Add to Cart</button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -58,29 +69,16 @@
 
         <div class="col-md-8 px-4 mb-2 bg-white text-dark border shadow-sm ms-4 mb-5 ">
             <div class="description">
-                <h5>Description</h5>
+                <h5 class="pt-2">Description</h5>
                 <hr class="opacity-25">
-                <p>True-to-life color. Effortless connectivity. Dazzling 4K value. Samsung Crystal UHD is worth a look (and more). Effortlessly access TV shows, movies and ambient content using the Samsung Smart Hub, or find a range of great games on the Samsung Gaming Hub.(High speed internet connection, additional gaming service subscriptions and compatible controller required.) Enjoy content even more clear than it was created as its upgraded to 4K resolution. Color and contrast are also improved with our PurColor and Mega Contrast technologies that instantly analyze and adjust what you see on screen. As all the visual details shine through, you'll be surrounded by 3D sound that moves with the action, engaging all your senses.</p>
-            </div>
-
-            <div class="specification">
-                <h5>Specification</h5>
-                <ul>
-                    <li>SKU: VI799EA1QMSQ4NAFAMZ</li>
-                    <li>Model: VP8832DF</li>
-                    <li>Production Country: China</li>
-                    <li>Size (L x W x H cm): -</li>
-                    <li>Weight (kg): 3</li>
-                    <li>Main Material: pvc</li>
-                    <li>Shop Type: Jumia Mall</li>
-                </ul>
+                <p><?php echo $data[0]->product_description; ?></p>
             </div>
 
         </div>
 
         <div class="col-md-8 round-1 px-3 mb-2 bg-white text-dark border shadow-sm ms-4 mb-5  ">
             <div class="reviews">
-                <h5>Customer Reviews</h5>
+                <h5 class="pt-2">Customer Reviews</h5>
                 <hr>
                 <div class="d-flex flex-row gap-5 ">
                     <h3 class="fw-bold "><span class="text-warning"> 5</span> /5 </h3>
@@ -97,7 +95,7 @@
 
         <div class="col-md-8 rounded-1 px-3 mb-2 bg-white text-dark border shadow-sm ms-4 mb-5  ">
             <div class="reviews">
-                <h5>Martin M.</h5>
+                <h5 class="pt-2">Martin M.</h5>
                 <div class="d-flex flex-row gap-row-2 stars">
                     <ion-icon name="star"></ion-icon>
                     <ion-icon name="star"></ion-icon>
@@ -106,79 +104,50 @@
                     <ion-icon name="star"></ion-icon>
                 </div>
                 <hr>
-                <img src="" alt="">
-                <p>Used fir steaming service quality was excellent I will guarantee it to my friends and family. I am sure they will love it and appreciate it as much as I have enjoyed the experience of being able to try out and enjoying the product. </p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt illo suscipit voluptates atque autem ullam aut, eaque, est, dolor esse ipsum. Ratione voluptatibus id molestiae minus, corporis laboriosam excepturi itaque!</p>
             </div>
         </div>
 
-
-
-        <div class="col-md-8 rounded-1 px-3 mb-2 bg-white text-dark border shadow-sm ms-4 mb-5  ">
-            <div class="reviews  ">
-                <h5>Martin M.</h5>
-                <div class="d-flex flex-row gap-row-2 stars ">
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                </div>
-                <hr>
-                <img src="" alt="">
-                <p>Used fir steaming service quality was excellent I will guarantee it to my friends and family. I am sure they will love it and appreciate it as much as I have enjoyed the experience of being able to try out and enjoying the product. </p>
-            </div>
-        </div>
-
-
-        <div class=" col-md-8 p-3 mb-2 bg-white text-dark border shadow-sm ms-4 rounded-1   ">
-            <h5>You may also like </h5>
-            <hr>
-            <div class="likes d-flex justify-content-center grid gap-2  ">
-
-                <div class="rounded-1 border shadow-sm p-4 lh-base col-sm-2 w-25 h-50">
-                    <img src="<?php echo esc_url(get_template_directory_uri() . './pimages/oraimo1.jpg') ?> " class="w-100 h-75" alt="">
-                    <p>oraimo earpods <br>
-                        <span class=" fw-bold"> KSh. 5,499</span> <br>
-                        <span class="text-decoration-line-through opacity-50"> KSh. 6,499</span>
-                    </p>
-                </div>
-                <div class="rounded-1 border shadow-sm p-4 lh-base col-sm-2 w-25 h-50">
-                    <img src="<?php echo esc_url(get_template_directory_uri() . './pimages/oraimo1.jpg') ?> " class="w-100 h-75" alt="">
-                    <p>oraimo earpods <br>
-                        <span class=" fw-bold"> KSh. 5,499</span> <br>
-                        <span class="text-decoration-line-through opacity-50"> KSh. 6,499</span>
-                    </p>
-                </div>
-                <div class="rounded-1 border shadow-sm p-4 lh-base col-sm-2 w-25 h-50">
-                    <img src="<?php echo esc_url(get_template_directory_uri() . './pimages/oraimo1.jpg') ?> " class="w-100 h-75" alt="">
-                    <p>oraimo earpods <br>
-                        <span class=" fw-bold"> KSh. 5,499</span> <br>
-                        <span class="text-decoration-line-through opacity-50"> KSh. 6,499</span>
-                    </p>
-                </div>
-                <div class="rounded-1 border shadow-sm p-4 lh-base col-sm-2 w-25 h-50 ">
-                    <img src="<?php echo esc_url(get_template_directory_uri() . './pimages/oraimo1.jpg') ?> " class=" w-100 h-75" alt="">
-                    <p>oraimo earpods <br>
-                        <span class=" fw-bold"> KSh. 5,499</span> <br>
-                        <span class="text-decoration-line-through opacity-50"> KSh. 6,499</span>
-                    </p>
-                </div>
+        <div class="products-section">
+            <?php
+            $related_products = $wpdb->get_results("SELECT * FROM wp_products WHERE product_category='{$data[0]->product_category}' AND p_id!=$id");
+            ?>
+            <div class="products-section-header">
+                <span>You may also like</span>
             </div>
 
+
+            <div class="products-section-content">
+                <?php
+                for ($i = 0; $i < min(4, count($related_products)); $i++) {
+                ?>
+                    <a href="<?php echo "/shopit/product?id={$related_products[$i]->p_id}" ?>">
+                        <div class="product">
+                            <div class="product-img">
+                                <img src="<?php echo $related_products[$i]->product_image; ?>" alt="product">
+
+                            </div>
+
+                            <div class="product-info">
+                                <p class="product-name">
+                                    <?php echo $related_products[$i]->product_name; ?>
+                                </p>
+                                <p class="product-price">
+                                    <?php echo add_commas($related_products[$i]->product_price); ?>
+                                </p>
+                                <p class="product-price-original">
+                                    <?php echo add_commas($related_products[$i]->initial_price); ?>
+                                </p>
+                            </div>
+
+                            <!-- <button class="custom-btn" onclick="">ADD TO CART</button> -->
+                        </div>
+                    </a>
+                <?php
+                }
+                ?>
+            </div>
         </div>
     </div>
 
-    <?php
-  $product_price = get_post_meta(get_the_ID(), 'product_price', true);
-  $product_sku = get_post_meta(get_the_ID(), 'product_sku', true);
-?>
-
-<div class="product-price"><?php echo '$' . number_format($product_price, 2); ?></div>
-<div class="product-sku"><?php echo 'SKU: ' . $product_sku; ?></div>
-
-
-</div>
-
-
-
-<?php get_footer(); ?>
+    <?php get_footer(); ?>

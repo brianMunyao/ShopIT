@@ -24,7 +24,13 @@ if (isset($_POST['submit'])) {
         wp_redirect(home_url());
         exit;
     }
-    echo "Server Error";
+    // // echo count($user->errors);
+    // if (count($user->errors) > 0) {
+    //     // $error = $user->errors;
+    //     var_dump($user->errors);
+    // } else {
+    // }
+    $error = "Invalid username or password";
 }
 ?>
 
@@ -35,11 +41,15 @@ if (isset($_POST['submit'])) {
 
             <h1>Login</h1>
 
+            <?php
+            echo "<p class='form-error'>" . $error . "</p>";
+            ?>
+
             <div class="input-con">
                 <label for="email">Email</label>
                 <div>
                     <ion-icon name="mail-outline"></ion-icon>
-                    <input class="" type="email" name="email" placeholder="Enter your email" required />
+                    <input class="" type="text" name="email" placeholder="Enter your email" required />
                 </div>
             </div>
 
