@@ -1,11 +1,11 @@
 <?php get_header(); ?>
 <?php
+$id = $_GET['id'];
 
 global $wpdb;
 $table_name = $wpdb->prefix . "products";
-$data = $wpdb->get_results("SELECT * FROM $table_name ");
+$data = $wpdb->get_results("SELECT * FROM $table_name WHERE p_id=$id");
 
-$index = '14';
 
 ?>
 
@@ -18,19 +18,19 @@ $index = '14';
                         <?php for ($i = 0; $i < 4; $i++) { ?>
                             <picture class="d-flex flex-column  float-start p-images w-75 h-50 gap-2 lh-sm  ">
                                 <source srcset="" type="image/svg+xml">
-                                <img src="<?php echo $data[$index]->product_image; ?> " class=" d-flex flex-column w-75 h-50" alt="...">
+                                <img src="<?php echo $data[0]->product_image; ?> " class=" d-flex flex-column w-75 h-50" alt="...">
                             </picture>
                         <?php } ?>
                     </div>
 
-                    <img src="<?php echo $data[$index]->product_image; ?> " class="float-end w-75 h-75" alt="...">
+                    <img src="<?php echo $data[0]->product_image; ?> " class="float-end w-75 h-75" alt="...">
                 </div>
             </div>
         </div>
         <div class=" col-md-3 p-4 mb-2 bg-white text-dark border shadow-sm h-50  ">
             <div class="description">
-                <p>Brand: &nbsp; <?php echo $data[$index]->product_brand; ?></p>
-                <h6><?php echo $data[$index]->product_name; ?></h6>
+                <p>Brand: &nbsp; <?php echo $data[0]->product_brand; ?></p>
+                <h6><?php echo $data[0]->product_name; ?></h6>
                 <img src="/ShopIT/p-images/" alt="">
                 <div class="d-flex flex-row gap-row-2 stars">
                     <ion-icon name="star"></ion-icon>
@@ -39,9 +39,9 @@ $index = '14';
                     <ion-icon name="star"></ion-icon>
                     <ion-icon name="star"></ion-icon>
                 </div>
-                <p class="fw-bold"> Ksh.&nbsp;<?php echo $data[14]->product_price; ?></p>
+                <p class="fw-bold"> Ksh.&nbsp;<?php echo $data[0]->product_price; ?></p>
                 <p class=""> <span class="text-decoration-line-through opacity-50">Ksh. &nbsp;
-                        <?php echo $data[14]->initial_price; ?>
+                        <?php echo $data[0]->initial_price; ?>
                     </span><span class="text-success"> &nbsp; -35% </span></p>
                 <div class="d-grid gap-2">
                     <button class="btn btn-primary" name="add_to_cart" type="button">Add to Cart</button>
@@ -58,7 +58,7 @@ $index = '14';
             <div class="description">
                 <h5 class="pt-2">Description</h5>
                 <hr class="opacity-25">
-                <p><?php echo $data[$index]->product_description; ?></p>
+                <p><?php echo $data[0]->product_description; ?></p>
             </div>
 
         </div>
@@ -91,28 +91,48 @@ $index = '14';
                     <ion-icon name="star"></ion-icon>
                 </div>
                 <hr>
-                <img src="" alt="">
-                <p>Used fir steaming service quality was excellent I will guarantee it to my friends and family. I am sure they will love it and appreciate it as much as I have enjoyed the experience of being able to try out and enjoying the product. </p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt illo suscipit voluptates atque autem ullam aut, eaque, est, dolor esse ipsum. Ratione voluptatibus id molestiae minus, corporis laboriosam excepturi itaque!</p>
             </div>
         </div>
 
+        <div class="products-section">
+            <?php
+            $appliances = $wpdb->get_results("SELECT * FROM wp_products WHERE product_category='{$data[0]->product_category}'");
+            ?>
+            <div class="products-section-header">
+                <span>You may also like</span>
+            </div>
 
 
-        <div class="col-md-8 p-3 mb-2 bg-white text-dark border shadow-sm ms-4 rounded-1 mb-3">
-            <h5>You may also like</h5>
-            <hr>
-            <div class="likes d-flex justify-content-center grid gap-2">
+            <div class="products-section-content">
                 <?php
-                for ($i = 1; $i <= 4; $i++) {
+                for ($i = 0; $i < min(6, count($appliances)); $i++) {
                 ?>
-                    <div class="rounded-1 border shadow-sm p-4 lh-base col-sm-2 w-25 h-50">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . './pimages/oraimo1.jpg') ?>" class="w-100 h-75" alt="">
-                        <p>oraimo earpods<br>
-                            <span class="fw-bold">KSh. 5,499</span><br>
-                            <span class="text-decoration-line-through opacity-50">KSh. 6,499</span>
-                        </p>
-                    </div>
-                <?php } ?>
+                    <a href="<?php echo "/shopit/product?id={$appliances[$i]->p_id}" ?>">
+                        <div class="product">
+                            <div class="product-img">
+                                <img src="<?php echo $appliances[$i]->product_image; ?>" alt="product">
+
+                            </div>
+
+                            <div class="product-info">
+                                <p class="product-name">
+                                    <?php echo $appliances[$i]->product_name; ?>
+                                </p>
+                                <p class="product-price">
+                                    <?php echo add_commas($appliances[$i]->product_price); ?>
+                                </p>
+                                <p class="product-price-original">
+                                    <?php echo add_commas($appliances[$i]->initial_price); ?>
+                                </p>
+                            </div>
+
+                            <!-- <button class="custom-btn" onclick="">ADD TO CART</button> -->
+                        </div>
+                    </a>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </div>
