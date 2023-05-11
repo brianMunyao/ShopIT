@@ -23,19 +23,23 @@ $delivery = 300;
         <!-- ITEMS PRESENT IN THE CART -->
         <div class="col-md-8 p-3 mb-2 bg-white text-dark border shadow-sm  ">
             <h5>Cart (<?php echo count($cart_items); ?>)</h5>
-            <hr class="opacity-25 w-100">
             <?php
             for ($i = 0; $i < count($cart_items); $i++) {
             ?>
+                <hr class="opacity-25 w-100">
 
                 <div class="container text-center ">
                     <div class="row">
                         <div class="col d-flex flex-row ">
 
-                            <img src="<?php echo $cart_items[$i]->product_image; ?>" class="rounded float-start w-50 h-100" alt="...">
-                        </div>
+                                <img src="<?php echo $cart_items[$i]->product_image; ?>" class="rounded float-start w-50 h-100" alt="...">
+                          
+                            </div>
                         <div class="col-6 pt-3">
+                        <a href="<?php echo site_url("/product?id={$cart_items[$i]->p_id}") ?>">
+
                             <p><?php echo $cart_items[$i]->product_name; ?></p>
+                        </a>
                         </div>
                         <div class="col d-flex flex-row-reverse ">
                             <p class="fw-bold "><?php echo add_commas($cart_items[$i]->product_price); ?> <br>
@@ -47,13 +51,16 @@ $delivery = 300;
 
                     </div>
                     <div class="row ">
-                        <form action="" method="post">
+                        <div class="col">
+                            <form action="" method="post">
 
-                            <div class="col d-flex flex-row px-4">
-                                <input type="hidden" name="p_id" value="<?php echo $cart_items[$i]->p_id ?>">
-                                <button class="btn btn-danger" type="submit" name="remove_from_cart"> <ion-icon name="trash-outline"></ion-icon>REMOVE</button>
-                            </div>
-                        </form>
+                                <div class="col d-flex flex-row px-4">
+                                    <input type="hidden" name="p_id" value="<?php echo $cart_items[$i]->p_id ?>">
+                                    <button class="btn btn-danger btn-sm mt-2 " type="submit" name="remove_from_cart"> <ion-icon name="trash-outline"></ion-icon>REMOVE</button>
+                                </div>
+                            </form>
+
+                        </div>
                         <div class="col d-flex flex-row-reverse ">
                             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                                 <form action="" method="post">
@@ -104,7 +111,7 @@ $delivery = 300;
         </div>
 
         <!-- CART SUMMARY -->
-        <div class=" col-md-3 p-3 mb-2 bg-white text-dark border shadow-sm ">
+        <div class=" col-md-3 p-3 mb-2 bg-white text-dark border shadow-sm h-25 ">
             <div class="description">
                 <h6>Cart Summary</h6>
                 <hr class="opacity-25">
