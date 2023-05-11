@@ -4,18 +4,6 @@ if (!is_user_logged_in()) {
     exit();
 }
 ?>
-<?php 
-if(isset($_POST['update'])) {
-    $new_fullname = $_POST['fullname'];
-    $new_email = $_POST['email'];
-    $new_phone = $_POST['phone'];
-    $new_address = $_POST['address'];
-    $new_password = $_POST['password'];
-
-
-    //update_user_info($user_id, $meta_key, $meta_value);
-}
-?>
 <?php get_header(); ?>
 
 <?php
@@ -70,7 +58,6 @@ if (isset($_POST['update_user_btn'])) {
                     <div>
                         <ion-icon name="person-outline"></ion-icon>
                         <input class="" type="text" name="fullname" placeholder="Enter your full name" value="<?php echo $user['fullname']; ?>" required />
-                        <input class="" type="text" name="fullname" placeholder="Enter your full name" value="<?php echo $user['fullname']; ?>" required />
                     </div>
                 </div>
                 <div class="input-con">
@@ -84,7 +71,6 @@ if (isset($_POST['update_user_btn'])) {
                     <label for="phone">Phone Number</label>
                     <div>
                         <ion-icon name="call-outline"></ion-icon>
-                        <input class="" type="text" name="phone" placeholder="Enter your phone number" value="<?php echo $user['phone']; ?>" required />
                         <input class="" type="text" name="phone" placeholder="Enter your phone number" value="<?php echo $user['phone']; ?>" required />
                     </div>
                 </div>
