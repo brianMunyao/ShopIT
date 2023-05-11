@@ -19,12 +19,18 @@
             $query .= " WHERE product_category='$category'";
         }
     }
-
     global $wpdb;
 
     $products = $wpdb->get_results($query);
 
-    echo "<h4>" . count($products) . " result(s) for $searchterm</h4>";
+    if ($category === '' && $searchterm === '') {
+        echo "<h4>For you</h4>";
+    } else {
+
+        $results_for =  "<h4>" . count($products) . " result(s) for "  . ($searchterm !== '' ? "'$searchterm'" : '') . ($category !== '' ? " '$category'" : '') . "</h4>";
+        echo $results_for;
+    }
+
 
     if (count($products) > 0) {
     ?>
