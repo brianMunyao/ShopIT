@@ -139,7 +139,7 @@ class AddProducts
             $results = $wpdb->insert($table_name, $data);
 
             if (!$results) {
-                //error
+                /git /error
             }
         }
     }
