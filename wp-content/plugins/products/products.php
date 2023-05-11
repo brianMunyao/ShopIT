@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package AddProducts
  */
@@ -102,36 +103,46 @@ class AddProducts
     }
 
 
-     //CREATING THE CART TABLE IN DB 
-     static function create_cart_table_to_db()
-     {
-         global $wpdb;
- 
-         $table_name = $wpdb->prefix . 'cart';
- 
-         $product_details = "CREATE TABLE IF NOT EXISTS " . $table_name . "(
-             p_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    //CREATING THE CART TABLE IN DB 
+    static function create_cart_table_to_db()
+    {
+        global $wpdb;
+
+        $table_name = $wpdb->prefix . 'cart';
+
+        $product_details = "CREATE TABLE IF NOT EXISTS " . $table_name . "(
+             id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
              user_id int NOT NULL,
-             product_brand text NOT NULL,
+             p_id int NOT NULL,
+             quantity int NOT NULL,
          );";
-         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-         dbDelta($product_details);
-     }
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        dbDelta($product_details);
+    }
 
 
-     // ADDING A SINGLE PRODUCT TO THE CART TABLE IN DB
-     function add_product_to_cart()
-     {
-         if (isset($_POST['add_to_cart'])) {
- 
-             $data = [
-                 'product_id' => $_POST['p_id'],
-                 'user_id' => $_POST['user_id'],
-                 'product_brand' => $_POST['p_brand'],
-             ]; 
-             
-         }
-     }
+    // ADDING A SINGLE PRODUCT TO THE CART TABLE IN DB
+    function add_product_to_cart()
+    {
+        if (isset($_POST['add_to_cart'])) {
+
+            $data = [
+                'user_id' => $_POST['user_id'],
+                'p_id' => $_POST['p_id'],
+                'quantity' => $_POST['quantity'],
+            ];
+
+
+            global $wpdb;
+
+            $table_name = $wpdb->prefix . 'cart';
+            $results = $wpdb->insert($table_name, $data);
+
+            if (!$results) {
+                //error
+            }
+        }
+    }
 
     function update_product_to_db()
     {
