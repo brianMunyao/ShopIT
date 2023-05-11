@@ -12,30 +12,29 @@ global $wpdb;
 $table_name = $wpdb->prefix . "products";
 $data = $wpdb->get_results("SELECT * FROM $table_name WHERE p_id=$id");
 
-// 'user_id' => $_POST['user_id'],
-// 'p_id' => $_POST['p_id'],
-// 'quantity' => $_POST['quantity'],
 ?>
 
 <div class=" bg-light text-dark --bs-secondary-color-rgb w-100 overflow-hidden ">
-    <div class=" row grid gap-5 ps-5  mb-5 mt-3">
-        <div class="col-md-8  bg-white text-dark border shadow-sm ">
+    <div class="row grid gap-5 ps-5  mb-5 mt-3 ">
+        <div class="col-md-8  bg-white text-dark border shadow-sm h-50 ">
             <div class="d-flex">
-                <div class=" d-flex flex-row ">
-                    <div class="d-flex flex-column ">
+                <div class=" d-flex flex-row">
+                    <div class=" col-md-4 d-flex flex-column pt-4 gap-5 justify-center ">
                         <?php for ($i = 0; $i < 4; $i++) { ?>
-                            <picture class="d-flex flex-column  float-start p-images w-75 h-50 gap-2 lh-sm  ">
+                            <picture class="d-flex flex-column  float-start   ">
                                 <source srcset="" type="image/svg+xml">
-                                <img src="<?php echo $data[0]->product_image; ?> " class=" d-flex flex-column w-75 h-50" alt="...">
+                                <img src="<?php echo $data[0]->product_image; ?> " class=" d-flex flex-column w-25 h-100  " alt="...">
                             </picture>
                         <?php } ?>
                     </div>
-
-                    <img src="<?php echo $data[0]->product_image; ?> " class="float-end w-75 h-75" alt="...">
+                        <div class="col-md-6">
+                        <img src="<?php echo $data[0]->product_image; ?> " class="float-end  pt-3 " alt="...">
+                        </div>
+                    
                 </div>
             </div>
         </div>
-        <div class=" col-md-3 p-4 mb-2 bg-white text-dark border shadow-sm">
+        <div class=" col-md-3 p-4 mb-2 bg-white text-dark border shadow-sm h-25">
             <div class="description">
                 <p>Brand: &nbsp; <?php echo $data[0]->product_brand; ?></p>
                 <h6><?php echo $data[0]->product_name; ?></h6>
@@ -61,8 +60,6 @@ $data = $wpdb->get_results("SELECT * FROM $table_name WHERE p_id=$id");
                 </form>
             </div>
         </div>
-
-
     </div>
 
     <div class="column grid mr-2">
