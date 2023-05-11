@@ -93,37 +93,42 @@ $products = $wpdb->get_results("SELECT * FROM wp_products");
             <!-- <span>Phone</span> -->
         </div>
 
+
         <div class="featured-section-content">
-            <div class="featured-product">
-                <div class="product-info">
-                    <p class="product-category">
-                        Microwaves
-                    </p>
-                    <p class="low">As low as</p>
-                    <p class="product-price">
-                        Ksh. 10,000
-                    </p>
-                </div>
+            <a href='<?php echo "/shopit/products?q=microwave"; ?>'>
+                <div class="featured-product">
+                    <div class="product-info">
+                        <p class="product-category">
+                            Microwaves
+                        </p>
+                        <p class="low">As low as</p>
+                        <p class="product-price">
+                            Ksh. 10,000
+                        </p>
+                    </div>
 
-                <div class="product-img">
-                    <img src="<?php echo $microwave; ?>" alt="microwave">
+                    <div class="product-img">
+                        <img src="<?php echo $microwave; ?>" alt="microwave">
+                    </div>
                 </div>
-            </div>
-            <div class="featured-product">
-                <div class="product-info">
-                    <p class="product-category">
-                        Refrigerators
-                    </p>
-                    <p class="low">As low as</p>
-                    <p class="product-price">
-                        Ksh. 20,000
-                    </p>
-                </div>
+            </a>
+            <a href='<?php echo "/shopit/products?q=refrigerator"; ?>'>
+                <div class="featured-product">
+                    <div class="product-info">
+                        <p class="product-category">
+                            Refrigerators
+                        </p>
+                        <p class="low">As low as</p>
+                        <p class="product-price">
+                            Ksh. 20,000
+                        </p>
+                    </div>
 
-                <div class="product-img">
-                    <img src="<?php echo $refrigerator; ?>" alt="re$refrigerator">
+                    <div class="product-img">
+                        <img src="<?php echo $refrigerator; ?>" alt="re$refrigerator">
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 
