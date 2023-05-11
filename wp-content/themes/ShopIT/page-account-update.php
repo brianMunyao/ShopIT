@@ -4,6 +4,18 @@ if (!is_user_logged_in()) {
     exit();
 }
 ?>
+<?php 
+if(isset($_POST['update'])) {
+    $new_fullname = $_POST['fullname'];
+    $new_email = $_POST['email'];
+    $new_phone = $_POST['phone'];
+    $new_address = $_POST['address'];
+    $new_password = $_POST['password'];
+
+
+    //update_user_info($user_id, $meta_key, $meta_value);
+}
+?>
 <?php get_header(); ?>
 
 
@@ -28,7 +40,7 @@ $user = get_user_info();
                     <label for="fullname">Full Name</label>
                     <div>
                         <ion-icon name="person-outline"></ion-icon>
-                        <input class="" type="text" name="fullname" placeholder="Enter your full name" required />
+                        <input class="" type="text" name="fullname" placeholder="Enter your full name" value="<?php echo $user['fullname']; ?>" required />
                     </div>
                 </div>
                 <div class="input-con">
@@ -42,7 +54,7 @@ $user = get_user_info();
                     <label for="phone">Phone Number</label>
                     <div>
                         <ion-icon name="call-outline"></ion-icon>
-                        <input class="" type="text" name="phone" placeholder="Enter your phone number" required />
+                        <input class="" type="text" name="phone" placeholder="Enter your phone number" value="<?php echo $user['phone']; ?>" required />
                     </div>
                 </div>
                 <div class="input-con">
@@ -61,7 +73,7 @@ $user = get_user_info();
                 </div>
             </div>
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary w-100">Update</button>
+                <button type="submit" name="update" class="btn btn-primary w-100">Update</button>
             </div>
         </form>
     </div>

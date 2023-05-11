@@ -32,9 +32,9 @@ $user = get_user_info();
                     </div>
                     <div class="text-start">
                         <ul class="list-unstyled">
-                            <li>John Doe</li>
+                            <li><?php echo $user['fullname']; ?></li>
                             <li><?php echo $user['email']; ?></li>
-                            <li>+254700001111</li>
+                            <li><?php echo $user['phone']; ?></li>
                         </ul>
                     </div>
                 </div>
